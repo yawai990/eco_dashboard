@@ -7,7 +7,7 @@ const Products = () => {
   const handleForm =() => setShowForm(!showForm);
 
   return (
-    <section className="w-full max-w-[calc(100%-17%)] min-h-[60vh p-3 flex justify-center items-start">
+    <section className="w-full min-h-[60vh p-3 flex justify-center items-start">
       {
         showForm && <AddForm handleForm={handleForm} />
       }

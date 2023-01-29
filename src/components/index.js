@@ -9,3 +9,4 @@ export { default as ProductCard } from './ProductCard';
 export { default as AddForm } from './AddForm';
 export { default as Pagination } from './Pagination';
 export { default as InputLabel } from './InputLabel';
+export { default as ProfileBar} from './ProfileBar';

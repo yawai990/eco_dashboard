@@ -4,3 +4,4 @@ export { default as Products } from './Products';
 export { default as Setting } from './Settings';
 export { default as Employee } from './Employee';
 export { default as EmployeeDetail } from './EmployeeDetail';
+export { default as Login } from './Login';

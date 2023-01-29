@@ -16,7 +16,7 @@ const Orders = () => {
   const handleCalendar = () => setOpenCalendar(!openCalendar);
 
   return (
-    <section className="w-full max-w-[calc(100%-17%)] p-3 flex justify-center items-start">
+    <section className="w-full flex justify-center items-start">
        <main className='w-[95%] p-3 h-full'>
        <div className='mt-3 flex justify-between items-center'>
        <Text title={'orders'} textCase='capitalize' size={24} color={'text-head-gray'} />

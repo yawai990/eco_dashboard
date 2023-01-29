@@ -1,9 +1,11 @@
 import React from 'react'
 
-const Button = ({ btnIcon,rectangle,size,borderBottom,bold, btnText, btnfun, btnColor, btnBg,outline, rounded, shadow }) => {
+const Button = ({ btnType, btnIcon,rectangle,size,borderBottom,bold, btnText, btnfun, btnColor, btnBg,outline, rounded, shadow }) => {
 
   return (
-   <button onClick={btnfun} 
+   <button
+   type={btnType}
+   onClick={btnfun} 
    style={{
     background : btnBg,
     fontSize:`${size}px`

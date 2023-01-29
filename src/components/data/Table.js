@@ -85,7 +85,11 @@ export const orderColName = [
     },
     {
         id : 9,
-        name : 'status'
+        name : 'isPaid'
+    },
+    {
+        id : 10,
+        name : 'delivered'
     },
 ];
 
@@ -99,6 +103,7 @@ export const orderData = [
         date : '20/03/22',
         price : 425,
         payment : 'COD', // 1 = debit 2 = code
+        isPaid : 0, // 1 = debit 2 = code
         status : 'pending' //0 = cancel, 1 = pending  2 = complete
     },
     {
@@ -110,6 +115,7 @@ export const orderData = [
         date : '18/02/22',
         price : 425,
         payment : 'MPU', // 1 = debit 2 = code
+        isPaid : 1, // 0 = debit 2 = code
         status : 'complete' //0 = cancel, 1 = pending  2 = complete
     },
     {
@@ -121,6 +127,7 @@ export const orderData = [
         date : '16/03/22',
         price : 542,
         payment : 'MPU', // 1 = debit 2 = code
+        isPaid : 0,
         status : 'cancel' //0 = cancel, 1 = pending  2 = complete
     },
 ];

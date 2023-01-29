@@ -7,7 +7,7 @@ const Header = ({ title, center, color, size, fs, ls, textCase }) => {
       fontSize:`${size}px`
     }}
     className={`font-semibold
-    ${center && 'text-center'}
+    ${center ? 'text-center':''}
      text-${color ? color:'gray'} ${fs ? fs:'normal'} ${textCase ? textCase :'text-medium'} 
      leading-${ls ? ls:1}`}
      >

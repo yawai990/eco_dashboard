@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { FcCheckmark } from 'react-icons/fc';
+import { TiTimes } from 'react-icons/ti';
 
 const Table = ({ colData, rowData, border, clickFun }) => {
   return (
@@ -7,7 +9,7 @@ const Table = ({ colData, rowData, border, clickFun }) => {
         <tr>
           {
             colData?.map(col => (
-              <th key={col.id} className={`${col.name === '#' && 'max-w-[10px]'} min-w-[130px] py-2 capitalize text-center font-semibold`}>{col.name}</th>
+              <th key={col.id} className={`${col.name === '#' && 'max-w-[10px]'} min-w-[110px] py-2 capitalize text-center font-semibold`}>{col.name}</th>
             ))
           }
         </tr>
@@ -26,11 +28,20 @@ const Table = ({ colData, rowData, border, clickFun }) => {
                   <td key={`tablerow-${ind}`} className={`mb-2 py-2`}>
                     {
                       key === 'photo' ? <img src={row[key]} alt="" className='w-12 h-12 object-cover block mx-auto' />:
-                      <span className={`${key === 'status' ? row[key] === 'pending' ? 
+                      <span className={`text-gray ${key === 'status' && row[key] === 'pending' ? 
                       'text-orange-400':row[key] === 'complete' ? 
-                      'text-green-400':row[key] === 'cancel' && 'text-red-400' :'text-gray' }`}>
+                      'text-green-400':row[key] === 'cancel' && 'text-red-400'}
+                      ${key === 'isPaid' && (row[key] === 0 ? 'inline-block text-center text-2xl text-red-400': 
+                      row[key] === 1 ? 'inline-block text-center text-2xl text-green-400':'text-gray')}
+                      `}>
 
-                       { key === 'price' ? `$ ${row[key]}`:row[key] }
+                       { key === 'price' ? 
+                       `$ ${row[key]}`:
+                       key === 'isPaid' ? 
+                       row[key] === 0 ? <TiTimes />:
+                       row[key] === 1 && <FcCheckmark />:
+                       row[key] }
+      
                       </span>
                     }
                   </td>

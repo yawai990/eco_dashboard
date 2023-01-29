@@ -9,14 +9,14 @@ const Overview = () => {
   const [ chartTitle, setChartTitle ] =useState('income');
 
   return (
-    <section className="w-full max-w-[calc(100%-17%)] p-3 flex justify-center items-start">
+    <section className="w-full flex justify-center items-start">
       
-      <main className='w-[95%] p-3 h-full'>
+      <main className='w-[95%] p-1 h-full'>
       <div className='mt-3 '>
       <Text title={'overview'} textCase='capitalize' size={24} color={'text-head-gray'} />
       </div>
 
-      <div className="w-full mt-6 flex flex-wrap justify-between items-center gap-3">
+      <div className="w-full mt-6 flex flex-wrap justify-between items-center gap-2">
       <Card cardHeader={'Total Sales'} cardRevenue={25415648} cardPercent={'+25'} cardIcon={<BsHandbagFill />} iconColor='#FC7300' percentColor='#38E54D' />
       <Card cardHeader={'Total Expenses'} cardRevenue={124561} cardPercent={'-32'} cardIcon={<AiFillPieChart />} iconColor='#76549A' percentColor='#CC3636' />
       <Card cardHeader={'Total Visitors'} cardRevenue={24687} cardPercent={'+48'} cardIcon={<HiUserGroup />} iconColor='#38E54D' percentColor='#38E54D' />

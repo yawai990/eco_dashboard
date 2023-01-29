@@ -4,7 +4,7 @@ const Card = ({ cardHeader, cardRevenue, cardIcon, cardPercent, iconColor, perce
 
 
   return (
-    <main className='w-[240px] max-w-[350px] bg-white border border-stone-300 p-3 rounded-md'>
+    <main className='w-[250px] max-w-[350px] bg-white border border-stone-300 p-3 rounded-md'>
       <div className='flex justify-between items-center'>
 
         <div style={{color : iconColor}} className={`text-2xl`}>

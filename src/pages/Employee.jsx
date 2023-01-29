@@ -4,7 +4,7 @@ import { employeeColName, employeeData } from '../components/data/Table';
 import { useNavigate } from 'react-router-dom';
 
 const Employee = () => {
-  const navigate = useNavigate();
+  const navigate =useNavigate();
 
   const employeeDetail = id => navigate(`/employee/${id}`);
   return (
@@ -14,7 +14,7 @@ const Employee = () => {
       <Text title={'employee'} textCase='capitalize' size={24} color={'text-head-gray'} />
     </div>
 
-    <div className='max-w-full overflow-x-scroll mt-4'> 
+    <div className='w-full overflow-x-scroll mt-4'> 
           <Table colData={employeeColName} rowData={employeeData} border clickFun={employeeDetail} />
         </div>
 

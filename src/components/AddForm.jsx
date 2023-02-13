@@ -3,32 +3,58 @@ import Text from './Text';
 import InputLabel from './InputLabel';
 import Button from './Button';
 import { TiTimes } from 'react-icons/ti';
+import * as api from '../api';
+import { uploadImageCloudinary } from '../pages/utils/utils';
 
-const AddForm = ({handleForm}) => {
-  const handleSubmit = e =>{
+const AddForm = ({ handleForm, ToastNoti}) => {
+
+  const handleSubmit =async(e) =>{
     e.preventDefault();
 
     const element = e.target.elements;
 
     const productName = element.p_name.value;
     const productBrand = element.p_brand.value;
-    const productCategory = element.p_category.value;
-    const productPrice = element.p_price.value;
-    const productImages = element.p_image.value;
+    const productCategory = Number(element.p_category.value);
+    const productPrice = Number(element.p_price.value);
+    const productStock = Number(element.p_stock.value);
+    const productImages = element.p_image;
 
-    const productData ={productName,productBrand,productCategory,productPrice,productImages};
 
-    console.log(productData);
+   const productData ={productName,productBrand,productCategory,productPrice,productStock};
 
-    //clean out the input value
+    try{
+      uploadImageCloudinary(productImages.files[0])
+      .then(async(resp) => {
+        console.log(resp)
+        if(resp.status === 200 && resp.statusText === 'OK'){
+          // need to add image url from resp
+          await api.createProduct({...productData, img :`${resp.data.public_id}.${resp.data.format}`})
+          .then(resp =>{
+            if(resp.data.success){
+              ToastNoti('One Product Added')
+            }
+          })
+        .catch(err => console.log(err))
+        }
+      })
+      .catch(err => alert('err in add form'))
+       
+      }catch(err){
+      console.log(err)
+    }
+  
+    // clean out the input value
     element.p_name.value = '';
     element.p_brand.value = '';
     element.p_category.value = 'DEFAULT';
     element.p_price.value = '';
+    element.p_stock.value = 0;
     element.p_image.value = '';
-
+    
     handleForm()
   }
+
   return (
     <div className='w-full h-full absolute top-0 left-0 bg-[rgba(23,23,23,0.8)] z-20 py-5'>
       <div>
@@ -62,11 +88,8 @@ const AddForm = ({handleForm}) => {
 
 
             <div>
-          <label htmlFor="p_desc" className='w-full mb-2 block text-lg tracking-wider font-semibold capitalize'>Description</label>
-            <textarea id='p_desc'
-            placeholder='Product Description' 
-            cols={12}
-            className='w-full mb-2 block outline-none px-2 py-1 rounded bg-transparent border font-thin font-serif border-neutral-400 placeholder:capitalize tracking-wider focus:border-primary' />
+          <label htmlFor="stock" className='w-full mb-2 block text-lg tracking-wider font-semibold capitalize'>Description</label>
+          <InputLabel label={'product stock'} placeholder='stock' name='p_stock' inputType={'number'} />
             </div>
 
             <InputLabel label={'product image'} placeholder='new product Image' name='p_image' inputType={'file'} multiple />

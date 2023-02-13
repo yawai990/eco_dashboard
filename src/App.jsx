@@ -1,8 +1,10 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Layout';
-import { Overview, Orders, Products, Setting, Employee,EmployeeDetail } from './pages';
+import { Overview, Orders, Products,ProductEdit, Setting, Employee,EmployeeDetail } from './pages';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
+const queryClient = new QueryClient()
 
 const App = () => {
 
@@ -28,6 +30,10 @@ const App = () => {
           element : <Products />
         },
         {
+          path : '/products/:id',
+          element : <ProductEdit />
+        },
+        {
           path : '/employees',
           element : <Employee />
         },
@@ -43,7 +49,9 @@ const App = () => {
     }
   ])
   return (
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   )
 }
 

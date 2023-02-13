@@ -32,7 +32,7 @@ export const columName = [
 export const tableRowData = [
     {
         id : 1,
-        photo : 'https://res.cloudinary.com/dtcws1ecu/image/upload/v1669132792/cld-sample-5.jpg',
+        image : 'https://res.cloudinary.com/dtcws1ecu/image/upload/v1669132792/cld-sample-5.jpg',
         name : 'Sneaker',
         category : 'Fashion',
         brand : 'Adidas',
@@ -41,7 +41,7 @@ export const tableRowData = [
     },
     {
         id : 2,
-        photo : 'https://res.cloudinary.com/dtcws1ecu/image/upload/v1674628061/wtxvlnkgssebzgghbluz.png',
+        image : 'https://res.cloudinary.com/dtcws1ecu/image/upload/v1674628061/wtxvlnkgssebzgghbluz.png',
         name : 'Chair',
         category : 'Furniture',
         brand : 'indigo',

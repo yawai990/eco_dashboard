@@ -1,15 +1,37 @@
-import React,{ useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import { Text, Table, Button, CalendarCom } from '../components';
 import { orderColName, orderData } from '../components/data/Table';
 import { TiTimes } from 'react-icons/ti';
 import { format } from 'date-fns';
+import * as api from '../api';
+import { useQuery } from 'react-query';
 
 const Orders = () => {
   const [ openCalendar, setOpenCalendar ] = useState(false);
+  const [ data, setData ] = useState([]);
   const [ orderDate, setOrderDate ] = useState(new Date());
 
+  const getAllOrders = async(date) =>{
+    try {
+      return await api.getOrders(date) 
+      .then(resp=>{
+        console.log(resp)
+        if(resp.status === 200){
+          setData(resp.data)
+        }
+      })
+      .catch(err => err)
+    } catch (error) {
+        return error
+    }
+  };
+
+  useEffect(()=>{
+    getAllOrders(`${new Date(orderDate).getDate()}${new Date(orderDate).getMonth() + 1}${new Date(orderDate).getFullYear()}`)
+  }, [orderDate])
+ 
+
   const handleSetOrderDate = e => {
-    console.log(e)
     setOrderDate(e)
     handleCalendar()
   }
@@ -28,7 +50,7 @@ const Orders = () => {
       </div>
 
       <div className='max-w-full overflow-x-scroll mt-4'>
-        <Table colData={orderColName} rowData={orderData} border />
+        <Table colData={orderColName} rowData={data} border />
       </div>
       </main>
 

@@ -16,7 +16,7 @@ const Overview = () => {
       <Text title={'overview'} textCase='capitalize' size={24} color={'text-head-gray'} />
       </div>
 
-      <div className="w-full mt-6 flex flex-wrap justify-between items-center gap-2">
+      <div className="w-full mt-6 flex flex-wrap justify-between items-center gap-1">
       <Card cardHeader={'Total Sales'} cardRevenue={25415648} cardPercent={'+25'} cardIcon={<BsHandbagFill />} iconColor='#FC7300' percentColor='#38E54D' />
       <Card cardHeader={'Total Expenses'} cardRevenue={124561} cardPercent={'-32'} cardIcon={<AiFillPieChart />} iconColor='#76549A' percentColor='#CC3636' />
       <Card cardHeader={'Total Visitors'} cardRevenue={24687} cardPercent={'+48'} cardIcon={<HiUserGroup />} iconColor='#38E54D' percentColor='#38E54D' />

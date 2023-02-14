@@ -21,7 +21,7 @@ const Table = ({ colData, rowData, border, clickFun }) => {
             rowData.length > 0 ? rowData?.map((row,idx) =>{
               const rowKey = Object.keys(row);
 
-            return  <tr key={row._id} className='capitalize text-center text-[#2B4865] font-semibold border-b border-stone-200 hover:bg-stone-100 cursor-pointer'
+            return  <tr key={row._id || idx } className='capitalize text-center text-[#2B4865] font-semibold border-b border-stone-200 hover:bg-stone-100 cursor-pointer'
             onClick={() => clickFun(row._id)}
             >
               <td>{idx+1}</td>

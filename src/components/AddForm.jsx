@@ -26,7 +26,6 @@ const AddForm = ({ handleForm, ToastNoti}) => {
     try{
       uploadImageCloudinary(productImages.files[0])
       .then(async(resp) => {
-        console.log(resp)
         if(resp.status === 200 && resp.statusText === 'OK'){
           // need to add image url from resp
           await api.createProduct({...productData, img :`${resp.data.public_id}.${resp.data.format}`})

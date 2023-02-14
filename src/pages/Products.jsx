@@ -7,6 +7,7 @@ import * as api from '../api';
 
 const Products = () => {
   const [ showForm, setShowForm ] = useState(false);
+  const [ productAdd, setProductAdd ] = useState(false);
   const [ products, setProducts ] = useState([]);
   const [ currentPage, setCurrentPage ] = useState(1);
   const [ totalPagi, setTotalPagi ] = useState(1);
@@ -24,6 +25,11 @@ const Products = () => {
     })
     .catch(err => err)
   };
+
+  //call the getAllProducts fun when the user add new item
+  useEffect(() =>{
+    getAllProducts(currentPage)
+  },[ToastNoti])
 
   const deleteProduct = async (id, token)=>{
   

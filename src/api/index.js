@@ -21,7 +21,7 @@ export const registerUser = (registerData ) => API.post('/user/register', regist
 
 export const getProducts = (pageNum) => API.get(`/products/allproducts?pageNum=${pageNum || 1}`);
 export const getSingleProduct = (id) => API.get(`/products/singleproduct/${id}`);
-export const updateSingleProduct = ( id, updateData ) => API.put(`produt/updateproduct/${id}`, updateData);
+export const updateSingleProduct = ( id, updateData ) => API.put(`/products/updateproduct/${id}`, updateData);
 export const createProduct = ( newProduct ) => API.post(`/products/createproduct`,newProduct);
 export const fileUpload = ( uploadData ) => API.post(`/createproduct/fileupload`, uploadData) ;
 export const deleteProduct = (productID) => API.delete(`/products/deleteproduct/${productID}`);

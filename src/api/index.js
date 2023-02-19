@@ -27,4 +27,6 @@ export const fileUpload = ( uploadData ) => API.post(`/createproduct/fileupload`
 export const deleteProduct = (productID) => API.delete(`/products/deleteproduct/${productID}`);
 
 //order
+export const totalOrder = () => API.get('orders/totalorders');
 export const getOrders = (orderDate) => API.get(`orders/getallorders?orderdate=${orderDate}`);
+export const totalSalesRevenue = () => API.get('orders/totalsales');

@@ -11,16 +11,19 @@ const Products = () => {
   const [ products, setProducts ] = useState([]);
   const [ currentPage, setCurrentPage ] = useState(1);
   const [ totalPagi, setTotalPagi ] = useState(1);
+  const [ isLoading, setIsLoading ] = useState(true);
  
   const ToastNoti = noti =>toast(noti);
 
   const getAllProducts =async (pageNum) => {
+    setIsLoading(true)
     await api.getProducts(pageNum)
     .then(resp => {
       if(resp.status === 200 ){
         setProducts(resp.data.products)
         setCurrentPage(resp.data.pageNum)
         setTotalPagi(resp.data.pagination)
+        setIsLoading(false)
       }
     })
     .catch(err => err)
@@ -28,20 +31,20 @@ const Products = () => {
 
   //call the getAllProducts fun when the user add new item
   useEffect(() =>{
+    console.log('run')
     getAllProducts(currentPage)
-  },[ToastNoti])
+  },[currentPage])
 
   const deleteProduct = async (id, token)=>{
-  
+    setIsLoading(true)
     await api.deleteProduct(id, token)
     .then(resp => {
       getAllProducts(currentPage)
+      setIsLoading(false)
       ToastNoti('one product deleted')
     })
     .catch(err => console.log(err))
   }
-
-  const { isLoading, isError, data} = useQuery('product', () => getAllProducts(currentPage));
 
   
   const handleForm =() => setShowForm(!showForm);

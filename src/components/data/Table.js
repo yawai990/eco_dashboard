@@ -69,7 +69,7 @@ export const orderColName = [
     },
     {
         id : 5,
-        name : 'address'
+        name : 'quantity'
     },
     {
         id : 6,
@@ -90,6 +90,10 @@ export const orderColName = [
     {
         id : 10,
         name : 'delivered'
+    },
+    {
+        id : 11,
+        name : 'address'
     },
 ];
 

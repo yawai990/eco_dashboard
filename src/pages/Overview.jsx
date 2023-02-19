@@ -1,6 +1,6 @@
 import React,{ useState, useEffect } from 'react';
 import { Text,Card, Chart, Table } from '../components';
-import { columName, tableRowData } from '../components/data/Table';
+import { columName } from '../components/data/Table';
 import { BsHandbagFill } from 'react-icons/bs';
 import { AiFillPieChart } from 'react-icons/ai';
 import { HiUserGroup,HiShoppingCart } from 'react-icons/hi';
@@ -12,6 +12,7 @@ const Overview = () => {
   const [ total_sales, set_total_sales ] = useState(0);
   const [ total_revenue, set_total_revenue ] = useState(0);
   const [ incomeData, setIncomeData ] = useState([]);
+  const [ bestSeller, setBestSeller ] = useState([]);
 
   const TotalOrder = async() => {
    await api.totalOrder()
@@ -27,7 +28,6 @@ const Overview = () => {
   const revenue_and_saleQty = async() =>{
     await api.totalSalesRevenue()
     .then(resp => {
-      console.log(resp)
      const { status,totalRevenue,totalSales,monthly_revenue } = resp.data;
    
      if(status){
@@ -48,10 +48,23 @@ const Overview = () => {
     .catch(err => console.log(err));
 
   };
+ const getBestSellers = async () =>{
+   await api.bestSellers()
+   .then(resp =>{
+    const { status, bestseller } = resp.data;
+    if(status){
+      setBestSeller(bestseller)
+    }else{
+      setBestSeller([]);
+    }
+   })
+   .catch(err => console.log(err))
+ }
 
   useEffect(() =>{
     TotalOrder()
     revenue_and_saleQty()
+    getBestSellers()
   },[]);
 
   return (
@@ -97,10 +110,10 @@ const Overview = () => {
       </div>
 
       <div className="w-full mt-6 bg-white border border-stone-300 p-3 rounded">
-      <Text title={'Popular Products'} textCase='capitalize' size={20} color={'text-head-gray'} />
+      <Text title={'Best Seller Products'} textCase='capitalize' size={22} color={'text-head-gray'} />
 
       <div className='mt-3'>
-          <Table colData={columName} rowData={tableRowData} />
+          <Table colData={columName} rowData={bestSeller} />
       </div>
 
         </div>

@@ -27,10 +27,11 @@ const Table = ({ colData, rowData, border, clickFun }) => {
               <td>{idx+1}</td>
               {
                 rowKey?.map((key,ind)=>(
-                  <td key={`tablerow-${ind}`} className={`mb-2 py-2`}>
+                  key !== '_id' &&
+                   <td key={`tablerow-${ind}`} className={`mb-2 py-2`}>
                     
                     {
-                      key === 'image' ? <img src={`https://res.cloudinary.com/dtcws1ecu/image/upload/v1675567949/${row[key].image}`} alt="" className='w-12 h-12 object-cover block mx-auto' />:
+                      key === 'image' ? <img src={`https://res.cloudinary.com/dtcws1ecu/image/upload/v1675567949/${row[key][0].path}`} alt="" className='w-12 h-12 object-cover block mx-auto' />:
                       <span className={`inline-block text-gray 
                       ${ (key !== "quantity" && key === 'delivered' && row[key] === 0 )? 
                       'text-red-400 text-2xl':row[key] === 1 ? 
@@ -53,6 +54,7 @@ const Table = ({ colData, rowData, border, clickFun }) => {
                       </span>
                     }
                   </td>
+                  
                 ))
               }
               </tr>

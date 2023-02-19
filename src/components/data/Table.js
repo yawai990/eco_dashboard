@@ -5,11 +5,11 @@ export const columName = [
     },
     {
         id : 1,
-        name : 'photo'
+        name : 'item'
     },
     {
         id : 2,
-        name : 'item'
+        name : 'price'
     },
     {
         id : 3,
@@ -21,34 +21,14 @@ export const columName = [
     },
     {
         id : 5,
-        name : 'price'
+        name : 'stock'
     },
     {
         id : 6,
-        name : 'status'
+        name : 'photo'
     },
 ];
 
-export const tableRowData = [
-    {
-        id : 1,
-        image : 'https://res.cloudinary.com/dtcws1ecu/image/upload/v1669132792/cld-sample-5.jpg',
-        name : 'Sneaker',
-        category : 'Fashion',
-        brand : 'Adidas',
-        price : 350,
-        status : 'available' //1= available , 2 = out of stock
-    },
-    {
-        id : 2,
-        image : 'https://res.cloudinary.com/dtcws1ecu/image/upload/v1674628061/wtxvlnkgssebzgghbluz.png',
-        name : 'Chair',
-        category : 'Furniture',
-        brand : 'indigo',
-        price : 120,
-        status : 'out of stock' //1= available , 2 = out of stock
-    },
-];
 
 export const orderColName = [
     {

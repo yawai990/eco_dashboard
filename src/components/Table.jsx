@@ -3,7 +3,7 @@ import { FcCheckmark } from 'react-icons/fc';
 import { TiTimes } from 'react-icons/ti';
 
 const Table = ({ colData, rowData, border, clickFun }) => {
-
+    
   return (
     <table className={`w-full ${border && 'border border-stone-200'}`}>
       <thead className='w-full bg-[#D2DAFF] text-head-gray'>
@@ -20,7 +20,6 @@ const Table = ({ colData, rowData, border, clickFun }) => {
           {
             rowData.length > 0 ? rowData?.map((row,idx) =>{
               const rowKey = Object.keys(row);
-            
             return  <tr key={row._id || idx } className='capitalize text-center text-[#2B4865] font-semibold border-b border-stone-200 hover:bg-stone-100 cursor-pointer'
             onClick={() => clickFun(row._id)}
             >
@@ -33,16 +32,16 @@ const Table = ({ colData, rowData, border, clickFun }) => {
                     {
                       key === 'image' ? <img src={`https://res.cloudinary.com/dtcws1ecu/image/upload/v1675567949/${row[key][0].path}`} alt="" className='w-12 h-12 object-cover block mx-auto' />:
                       <span className={`inline-block text-gray 
-                      ${ (key !== "quantity" && key === 'delivered' && row[key] === 0 )? 
-                      'text-red-400 text-2xl':row[key] === 1 ? 
-                      'text-green-400 text-2xl':(key !== "quantity" && row[key] === 2) && 'text-red-400 text-2xl'}
                       ${(key !== "quantity" && key === 'isPaid') && (!row[key] ? 'inline-block text-center text-2xl text-red-400': 
                       'inline-block text-center text-2xl text-green-400')}
-                      `}>
+                      ${ key === 'delivered' ? (rowKey[key] ? 'text-green-400 text-2xl':'text-red-400 text-2xl'):'text-gray'}
+                      `}>   
 
                        { key === 'price' ? 
                        `$ ${row[key]}`:
-                       key === 'isPaid' || key === 'delivered' ? 
+                       key === 'isPaid' ? 
+                      (!row[key] ? <TiTimes />:<FcCheckmark />):
+                      key === 'delivered' ? 
                       (!row[key] ? <TiTimes />:<FcCheckmark />):
                       key === 'user'  ?
                        row[key].name : 
@@ -50,7 +49,7 @@ const Table = ({ colData, rowData, border, clickFun }) => {
                        row[key] 
                        
                        }
-      
+
                       </span>
                     }
                   </td>

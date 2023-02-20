@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Layout';
-import { Overview, Orders, Products,ProductEdit, Setting, Employee,EmployeeDetail } from './pages';
+import { Overview, Orders, Products,ProductEdit, Setting, Employee,EmployeeDetail,OrderDetails } from './pages';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
 const queryClient = new QueryClient()
@@ -40,6 +40,10 @@ const App = () => {
         {
           path : '/employee/:id',
           element : <EmployeeDetail />
+        },
+        {
+          path : '/order/:id',
+          element : <OrderDetails />
         },
         {
           path : '/settings',

@@ -32,7 +32,8 @@ const Login = ({setIsLogin}) => {
     elements.login_email.value = '';
     elements.login_password.value = '';
 
-  }
+  };
+  
   return (
     <section className='w-screen h-screen flex justify-center items-center'>
 

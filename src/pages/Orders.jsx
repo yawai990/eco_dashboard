@@ -1,6 +1,7 @@
 import React,{ useEffect, useState } from 'react';
 import { Text, Table, Button, CalendarCom } from '../components';
-import { orderColName, orderData } from '../components/data/Table';
+import { orderColName } from '../components/data/Table';
+import { useNavigate } from 'react-router-dom';
 import { TiTimes } from 'react-icons/ti';
 import { format } from 'date-fns';
 import * as api from '../api';
@@ -9,6 +10,7 @@ const Orders = () => {
   const [ openCalendar, setOpenCalendar ] = useState(false);
   const [ data, setData ] = useState([]);
   const [ orderDate, setOrderDate ] = useState('all');
+  const navigate = useNavigate();
 
   const getAllOrders = async(orderdate) =>{
     let order_date = 'all';
@@ -40,7 +42,10 @@ const Orders = () => {
     else getAllOrders()
       
   }, [orderDate]);
- 
+  
+  const handleOrderDetails = id =>{
+    navigate(`/order/${id}`)
+   }
 
   const handleSetOrderDate = e => {
     setOrderDate(e)
@@ -67,7 +72,7 @@ const Orders = () => {
       </div>
 
       <div className='max-w-full overflow-x-scroll mt-4'>
-        <Table colData={orderColName} rowData={data} border />
+        <Table colData={orderColName} rowData={data} clickFun={handleOrderDetails} border />
       </div>
       </main>
 

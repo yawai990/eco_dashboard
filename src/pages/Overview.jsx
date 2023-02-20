@@ -1,5 +1,6 @@
 import React,{ useState, useEffect } from 'react';
 import { Text,Card, Chart, Table } from '../components';
+import { useNavigate } from 'react-router-dom';
 import { columName } from '../components/data/Table';
 import { BsHandbagFill } from 'react-icons/bs';
 import { AiFillPieChart } from 'react-icons/ai';
@@ -13,6 +14,7 @@ const Overview = () => {
   const [ total_revenue, set_total_revenue ] = useState(0);
   const [ incomeData, setIncomeData ] = useState([]);
   const [ bestSeller, setBestSeller ] = useState([]);
+  const navigate = useNavigate();
 
   const TotalOrder = async() => {
    await api.totalOrder()
@@ -59,6 +61,10 @@ const Overview = () => {
     }
    })
    .catch(err => console.log(err))
+ };
+
+ const handleOrderDetails = id =>{
+  navigate(`/order/${id}`)
  }
 
   useEffect(() =>{
@@ -113,7 +119,7 @@ const Overview = () => {
       <Text title={'Best Seller Products'} textCase='capitalize' size={22} color={'text-head-gray'} />
 
       <div className='mt-3'>
-          <Table colData={columName} rowData={bestSeller} />
+          <Table colData={columName} rowData={bestSeller} clickFun={handleOrderDetails} />
       </div>
 
         </div>

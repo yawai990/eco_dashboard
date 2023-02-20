@@ -37,42 +37,38 @@ export const orderColName = [
     },
     {
         id : 2,
-        name : 'order id'
-    },
-    {
-        id : 3,
         name : 'product name'
     },
     {
-        id : 4,
+        id : 3,
         name : 'customer name'
     },
     {
-        id : 5,
+        id : 4,
         name : 'quantity'
     },
     {
-        id : 6,
+        id : 5,
         name : 'date'
     },
     {
-        id : 7,
+        id : 6,
         name : 'price'
     },
     {
-        id : 8,
+        id : 7,
         name : 'payment'
     },
     {
-        id : 9,
+        id : 8,
         name : 'isPaid'
     },
     {
-        id : 10,
+        id : 9,
         name : 'delivered'
     },
     {
-        id : 11,
+        id : 10,
         name : 'address'
     },
 ];

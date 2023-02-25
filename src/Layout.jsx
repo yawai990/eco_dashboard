@@ -3,6 +3,7 @@ import { Sidebar, ProfileBar } from './components';
 import { Login } from './pages';
 import { Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const Layout = () => {
   const [ isLogin, setIsLogin ] = useState(false);
@@ -26,6 +27,7 @@ const Layout = () => {
   return (
     <main className='max-w-screen min-h-screen flex overflow-x-hidden'>
         <Sidebar />
+        <ToastContainer />
 
         <div className='w-[80%] px-4'>
         <ProfileBar />  

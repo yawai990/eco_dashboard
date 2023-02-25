@@ -11,3 +11,4 @@ export { default as Pagination } from './Pagination';
 export { default as InputLabel } from './InputLabel';
 export { default as ProfileBar} from './ProfileBar';
 export { default as Loading } from './Loading';
+export { default as ImageCom } from './ImageCom';

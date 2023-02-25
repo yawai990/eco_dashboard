@@ -32,3 +32,4 @@ export const getOrders = (orderDate) => API.get(`orders/getallorders?orderdate=$
 export const getSingleOrder = (id) => API.get(`orders/getsingleorder/${id}`);
 export const totalSalesRevenue = () => API.get('orders/totalsales');
 export const bestSellers = () => API.get('products/bestsellers');
+export const MakeDelivered = (id, data) => API.put(`orders/makedeliver/${id}`, data);

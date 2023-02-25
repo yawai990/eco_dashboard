@@ -31,7 +31,6 @@ const Products = () => {
 
   //call the getAllProducts fun when the user add new item
   useEffect(() =>{
-    console.log('run')
     getAllProducts(currentPage)
   },[currentPage])
 

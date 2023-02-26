@@ -77,7 +77,7 @@ const Products = () => {
 
     <main className='mt-6'>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-cols-min gap-3 p-2 bg-white border border-stone-200 drop-shadow-sm'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-cols-min gap-3 p-2 bg-white border border-stone-100 drop-shadow-sm'>
       {
         !(isLoading && isError) && products?.map(product => <ProductCard 
           key={product._id}

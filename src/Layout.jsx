@@ -27,7 +27,7 @@ const Layout = () => {
   return (
     <main className='max-w-screen min-h-screen flex overflow-x-hidden'>
         <Sidebar />
-        <ToastContainer />
+        <ToastContainer pauseOnHover={false} />
 
         <div className='w-[80%] px-4'>
         <ProfileBar />  

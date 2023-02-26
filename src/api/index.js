@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL : 'http://localhost:5000/api'
+    baseURL : 'https://ecodashboard-backend.onrender.com/api'
+    // baseURL : 'http://localhost:5000/api'
 });
 
 API.interceptors.request.use(req =>{
@@ -17,8 +18,10 @@ API.interceptors.request.use(req =>{
 
 export const loginUser = (loginData) => API.post('/user/login', loginData);
 export const registerUser = (registerData ) => API.post('/user/register', registerData);
+export const getUser = (id) => API.get(`user/getuser/${id}`);
+export const updateUser = (id,updatedata) => API.put(`user/update/${id}`,updatedata);
 
-
+export const getYears = () => API.get('orders/years');
 export const getProducts = (pageNum) => API.get(`/products/allproducts?pageNum=${pageNum || 1}`);
 export const getSingleProduct = (id) => API.get(`/products/singleproduct/${id}`);
 export const updateSingleProduct = ( id, updateData ) => API.put(`/products/updateproduct/${id}`, updateData);
@@ -30,6 +33,6 @@ export const deleteProduct = (productID) => API.delete(`/products/deleteproduct/
 export const totalOrder = () => API.get('orders/totalorders');
 export const getOrders = (orderDate) => API.get(`orders/getallorders?orderdate=${orderDate}`);
 export const getSingleOrder = (id) => API.get(`orders/getsingleorder/${id}`);
-export const totalSalesRevenue = () => API.get('orders/totalsales');
+export const totalSalesRevenue = (year) => API.get(`orders/totalsales?year=${year}`);
 export const bestSellers = () => API.get('products/bestsellers');
 export const MakeDelivered = (id, data) => API.put(`orders/makedeliver/${id}`, data);

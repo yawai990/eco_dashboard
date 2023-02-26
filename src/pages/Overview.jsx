@@ -14,6 +14,8 @@ const Overview = () => {
   const [ total_revenue, set_total_revenue ] = useState(0);
   const [ incomeData, setIncomeData ] = useState([]);
   const [ bestSeller, setBestSeller ] = useState([]);
+  const [ budgetYears , setBudgetYears ] = useState([]);
+  const [ selectedYear, setSelectedYear ] = useState(String(new Date().getFullYear()));
   const navigate = useNavigate();
 
   const TotalOrder = async() => {
@@ -27,8 +29,8 @@ const Overview = () => {
     })
     .catch(err => err)
   };
-  const revenue_and_saleQty = async() =>{
-    await api.totalSalesRevenue()
+  const revenue_and_saleQty = async(year) =>{
+    await api.totalSalesRevenue(year)
     .then(resp => {
      const { status,totalRevenue,totalSales,monthly_revenue } = resp.data;
    
@@ -65,13 +67,29 @@ const Overview = () => {
 
  const handleOrderDetails = id =>{
   navigate(`/order/${id}`)
+ };
+
+ const getYears = async () => {
+  await api.getYears()
+  .then(resp =>{
+    const { success, years } = resp.data;
+    if(success){
+      setBudgetYears(years)
+    }
+  })
+  .catch(err => console.log(err));
  }
 
   useEffect(() =>{
     TotalOrder()
-    revenue_and_saleQty()
+    revenue_and_saleQty(selectedYear)
     getBestSellers()
+    getYears();
   },[]);
+
+  useEffect(() => {
+    revenue_and_saleQty(selectedYear)
+  }, [ selectedYear ]);
 
   return (
     <section className="w-full flex justify-center items-start">
@@ -104,9 +122,14 @@ const Overview = () => {
               ))
             }
           </div>
-          <select name="year" id="" className='border p-1 outline-none rounded-md border-head-gray font-semibold text-head-gray'>
-            <option value={2021}>2023</option>
-            <option value={2021}>2024</option>
+          <select name="year" id="" 
+          onChange={e => setSelectedYear(e.target.value)}
+          className='border p-1 outline-none rounded-md border-head-gray font-semibold text-head-gray'>
+           {
+            budgetYears?.map((y,idx)=>(
+              <option key={`${y}-${idx}`} value={y}>{y}</option>
+            ))
+           }
           </select>
         </div>
 

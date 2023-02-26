@@ -45,10 +45,8 @@ const ProductEdit = () => {
        productBrand, 
       productPrice:Number(productPrice), 
       productStock:Number(productStock) 
-    };
-    toast('hello')
+    };  
     //call the api 
-    console.log(updateData)
     await api.updateSingleProduct(singleId,updateData)
     .then(resp => {
       const { status,message } = resp.data;

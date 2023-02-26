@@ -26,19 +26,25 @@ const OrderDetails = ({ toast }) => {
   };
 
   const handleDeliver = async (orderid) => {
-    setDeliver(true)
-    await api.MakeDelivered(orderid, {
-      isDeliver : true
-    })
-     .then(resp => {
-       const { status, message } = resp.data;
-       if(status){
-        setDeliver(false);
-        toast(message)
-        getSingle(id)
-       }
-     })
-     .catch(err => console.log(err))
+
+    if(single_order.isDeliver){
+      toast.error('product already delivered')
+    }else{
+      
+      setDeliver(true)
+      await api.MakeDelivered(orderid, {
+        isDeliver : true
+      })
+       .then(resp => {
+         const { status, message } = resp.data;
+         if(status){
+          setDeliver(false);
+          toast.success(message)
+          getSingle(id)
+         }
+       })
+       .catch(err => console.log(err))
+      }
   }
 
   useEffect(()=>{

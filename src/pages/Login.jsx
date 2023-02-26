@@ -3,6 +3,7 @@ import { InputLabel, Button, Text } from '../components';
 import { BsEyeSlash } from 'react-icons/bs';
 import * as api from '../api';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = ({setIsLogin}) => {
   const navigate = useNavigate();
@@ -18,16 +19,27 @@ const Login = ({setIsLogin}) => {
     await api.loginUser({ email, password})
     .then(resp => {
       if(resp.data.userLoggedIn.isAdmin){
-        navigate('/')
-        localStorage.setItem('userInfo',JSON.stringify(resp.data.userLoggedIn));
-        setIsLogin(true)
-        setError('')
+        toast.success("You're successfully logged in");
+
+        setTimeout(()=>{
+
+          localStorage.setItem('userInfo',JSON.stringify(resp.data.userLoggedIn));
+          navigate('/')
+          setIsLogin(true)
+          setError('')
+        },1500)
       }else{
         setIsLogin(false)
         setError({ message :'you are not authenticated for this website, please contact admin'})
       }
     })
-    .catch(err => alert( err.message + ',Please Try again Later'))
+    .catch(err => {
+      const { success, message} = err.response.data;
+
+      if(!success){
+        toast.error(message)
+      }
+    })
 
     elements.login_email.value = '';
     elements.login_password.value = '';
@@ -36,6 +48,8 @@ const Login = ({setIsLogin}) => {
   
   return (
     <section className='w-screen h-screen flex justify-center items-center'>
+
+      <ToastContainer />
 
                 <div className='w-[380px] bg-white rounded border border-stone-300 p-3 drop-shadow-sm'>
         <Text title={'log in'} center size={27} textCase='capitalize' />

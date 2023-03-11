@@ -131,117 +131,121 @@ export const employeeColName = [
     },
     {
         id : 5,
-        name : 'salary'
+        name : 'department'
     },
     {
         id : 6,
+        name : 'salary'
+    },
+    {
+        id : 7,
         name : 'phone numer'
     },
 ];
 
 export const employeeData = [{
-    id: 1,
-    photo: "http://dummyimage.com/225x100.png/5fa2dd/ffffff",
+    image: "http://dummyimage.com/225x100.png/5fa2dd/ffffff",
     name: "Donna Duxbarry",
     employmentDate: "17-02-2022",
+    dept : 'HR',
     salary: "$3756.75",
     phone: "200-585-2337"
   }, {
-    id: 2,
-    photo: "http://dummyimage.com/116x100.png/5fa2dd/ffffff",
+    image: "http://dummyimage.com/116x100.png/5fa2dd/ffffff",
     name: "Leeland Noyes",
     employmentDate: "13-05-2022",
+    dept : 'HR',
     salary: "$139.76",
     phone: "242-250-0148"
   }, {
-    id: 3,
-    photo: "http://dummyimage.com/212x100.png/ff4444/ffffff",
+    image: "http://dummyimage.com/212x100.png/ff4444/ffffff",
     name: "Matthieu Kells",
     employmentDate: "08-12-2022",
+    dept : 'Marketting',
     salary: "$859.64",
     phone: "610-114-2892"
   }, {
-    id: 4,
-    photo: "http://dummyimage.com/182x100.png/ff4444/ffffff",
+    image: "http://dummyimage.com/182x100.png/ff4444/ffffff",
     name: "Fernandina Penzer",
     employmentDate: "29-01-2022",
+    dept : 'Marketting',
     salary: "$929.10",
     phone: "969-703-0964"
   }, {
-    id: 5,
-    photo: "http://dummyimage.com/128x100.png/cc0000/ffffff",
+    image: "http://dummyimage.com/128x100.png/cc0000/ffffff",
     name: "Nikki Gutans",
     employmentDate: "17-12-2022",
+    dept : 'Engineering',
     salary: "$744.74",
     phone: "635-982-8332"
   }, {
-     id : 6,
-     photo : "http://dummyimage.com/163x100.png/5fa2dd/ffffff",
+    image : "http://dummyimage.com/163x100.png/5fa2dd/ffffff",
      name : "Burnard Lorand",
      employmentDate : "09-05-2022",
+     dept : 'Engineering',
      salary : "$2261.95",
      phone : "550-971-5744"
   }, {
-     id : 7,
-     photo : "http://dummyimage.com/190x100.png/ff4444/ffffff",
+    image : "http://dummyimage.com/190x100.png/ff4444/ffffff",
      name : "Harri Guilliland",
      employmentDate : "04-09-2022",
+     dept : 'Security',
      salary : "$2374.52",
      phone : "419-158-9114"
   }, {
-     id : 8,
-     photo : "http://dummyimage.com/191x100.png/dddddd/000000",
+    image : "http://dummyimage.com/191x100.png/dddddd/000000",
      name : "Maria Greet",
      employmentDate : "22-07-2022",
+     dept : 'Security',
      salary : "$723.97",
      phone : "754-555-9906"
   }, {
-     id : 9,
-     photo : "http://dummyimage.com/238x100.png/cc0000/ffffff",
+    image : "http://dummyimage.com/238x100.png/cc0000/ffffff",
      name : "Lula Kettlestringes",
      employmentDate : "04-03-2022",
+     dept : 'Security',
      salary : "$2161.75",
      phone : "482-364-1555"
   }, {
-     id : 10,
-     photo : "http://dummyimage.com/104x100.png/cc0000/ffffff",
+    image : "http://dummyimage.com/104x100.png/cc0000/ffffff",
      name : "Paige Wilcott",
      employmentDate : "11-07-2022",
+     dept : 'Security',
      salary : "$3157.31",
      phone : "965-326-7562"
   }, {
-     id : 11,
-     photo : "http://dummyimage.com/193x100.png/dddddd/000000",
+    image : "http://dummyimage.com/193x100.png/dddddd/000000",
      name : "Marylynne Wyse",
      employmentDate : "03-10-2022",
+     dept : 'Security',
      salary : "$2363.04",
      phone : "905-942-0485"
   }, {
-     id : 12,
-     photo : "http://dummyimage.com/250x100.png/dddddd/000000",
+    image : "http://dummyimage.com/250x100.png/dddddd/000000",
      name : "Adan Cheyney",
      employmentDate : "30-04-2022",
+     dept : 'Security',
      salary : "$1939.13",
      phone : "211-708-1318"
   }, {
-     id : 13,
-     photo : "http://dummyimage.com/226x100.png/5fa2dd/ffffff",
+    image : "http://dummyimage.com/226x100.png/5fa2dd/ffffff",
      name : "Moina Stammers",
      employmentDate : "30-04-2022",
+     dept : 'Security',
      salary : "$1436.28",
      phone : "895-361-2509"
   }, {
-     id : 14,
-     photo : "http://dummyimage.com/180x100.png/5fa2dd/ffffff",
+    image : "http://dummyimage.com/180x100.png/5fa2dd/ffffff",
      name : "Gibbie Limprecht",
      employmentDate : "30-01-2022",
+     dept : 'Admin',
      salary : "$2945.82",
      phone : "127-388-2016"
   }, {
-     id : 15,
-     photo : "http://dummyimage.com/220x100.png/ff4444/ffffff",
+    image : "http://dummyimage.com/220x100.png/ff4444/ffffff",
      name : "Sukey Mariette",
      employmentDate : "30-12-2022",
+     dept : 'Finance',
      salary : "$2037.30",
      phone : "992-783-4205"
   }]

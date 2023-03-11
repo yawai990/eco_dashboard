@@ -6,7 +6,8 @@ import { TiTimes } from 'react-icons/ti';
 import * as api from '../api';
 import { uploadImageCloudinary } from '../pages/utils/utils';
 
-const AddForm = ({ handleForm, ToastNoti}) => {
+const AddForm = ({ handleForm, ToastNoti, categories}) => {
+
 
   const handleSubmit =async(e) =>{
     e.preventDefault();
@@ -55,7 +56,7 @@ const AddForm = ({ handleForm, ToastNoti}) => {
   }
 
   return (
-    <div className='w-full h-full absolute top-0 left-0 bg-[rgba(23,23,23,0.8)] z-20 py-5'>
+    <div className='w-full absolute top-0 left-0 bg-[rgba(23,23,23,0.8)] z-20 py-5'>
       <div>
           <Text title='what will be your new products?' size={25} center textCase='capitalize' color='white' />
 
@@ -74,11 +75,11 @@ const AddForm = ({ handleForm, ToastNoti}) => {
               <label htmlFor="p_category" className='w-full mb-2 block text-lg tracking-wider font-semibold capitalize'>Category</label>
               <select name="p_category" id="p_category"
               defaultValue={'DEFAULT'}
-               className='w-full h-[34px] mb-2 block outline-none px-2 py-1 rounded bg-transparent border font-thin font-serif border-neutral-400 placeholder:capitalize tracking-wider focus:border-primary'>
+               className='w-full h-[34px] mb-2 block capitalize outline-none px-2 py-1 rounded bg-transparent border font-thin font-serif border-neutral-400 placeholder:capitalize tracking-wider focus:border-primary'>
                 <option value='DEFAULT' disabled>Category</option>
-                <option value={0}>Fashion</option>
-                <option value={1}>Furniture</option>
-                <option value={2}>Electronic</option>
+                {
+                  categories?.map(c =><option key={c._id} className='capitalize' value={c.category}>{c.category}</option>)
+                }
               </select>
             </div>
             </div>

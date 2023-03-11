@@ -26,6 +26,7 @@ export const getProducts = (pageNum) => API.get(`/products/allproducts?pageNum=$
 export const getSingleProduct = (id) => API.get(`/products/singleproduct/${id}`);
 export const updateSingleProduct = ( id, updateData ) => API.put(`/products/updateproduct/${id}`, updateData);
 export const createProduct = ( newProduct ) => API.post(`/products/createproduct`,newProduct);
+export const getCategory = () => API.get('/category/getallcategory');
 export const fileUpload = ( uploadData ) => API.post(`/createproduct/fileupload`, uploadData) ;
 export const deleteProduct = (productID) => API.delete(`/products/deleteproduct/${productID}`);
 

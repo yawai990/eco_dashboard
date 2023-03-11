@@ -1,11 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import { Button, Text } from '../components';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import * as api from '../api';
 import { format } from 'date-fns';
 import { Loading, ImageCom } from '../components';
 
 const OrderDetails = ({ toast }) => {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
   const [ loading, setLoading ] = useState(true);
   const [ deliver, setDeliver ] = useState(false);
@@ -28,7 +29,8 @@ const OrderDetails = ({ toast }) => {
   const handleDeliver = async (orderid) => {
 
     if(single_order.isDeliver){
-      toast.error('product already delivered')
+      toast.error('product is on the way')
+      setTimeout(() => navigate('/order'), 3000);
     }else{
       
       setDeliver(true)

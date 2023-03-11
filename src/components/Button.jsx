@@ -10,6 +10,7 @@ const Button = ({ disabled, btnType, btnIcon,rectangle,size,borderBottom,bold, b
     background : btnBg,
     fontSize:`${size}px`
    }}
+   disabled={disabled}
    className={`${disabled ? 'cursor-not-allowed':'cursor-pointer'}
    text-${btnColor} flex gap-2 items-center 
    ${rectangle ? `p-1` : 'py-1 px-3'}

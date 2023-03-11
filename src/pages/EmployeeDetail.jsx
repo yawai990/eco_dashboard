@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Text } from '../components';
 import { employeeData } from '../components/data/Table';
+import { TiArrowBack } from 'react-icons/ti';
 import { BsPencil } from 'react-icons/bs';
 import { InputLabel } from '../components';
 import { PersonalInfo, Document, AdditionalData, Workdata } from '../components/employee';
@@ -10,12 +11,17 @@ const EmployeeDetail = () => {
 
   const handlePersonInfo = idx => setpersonCurInfo(idx);
 
-  return (
+   return (
     <section className="w-full p-3 flex justify-center items-start">
 
     <main className='w-[95%] p-3 h-full'>
-      <div className='mt-3 '>
+      <div className='mt-3 flex justify-between'>
       <Text title={'employee details'} textCase='capitalize' size={24} color={'text-head-gray'} />
+      <button 
+      onClick={() => history.back()}
+      className='bg-primary w-10 h-10 flex justify-center items-center text-4xl text-stone-100 rounded-full'>
+        <TiArrowBack />
+        </button>
     </div>
 
     <section className='flex flex-col md:flex-row gap-4 mt-4 '>

@@ -12,7 +12,8 @@ const Products = () => {
   const [ currentPage, setCurrentPage ] = useState(1);
   const [ totalPagi, setTotalPagi ] = useState(1);
   const [ isLoading, setIsLoading ] = useState(true);
- 
+  const [ categories, setCategories ] = useState([]);
+
   const ToastNoti = noti =>toast(noti);
 
   const getAllProducts =async (pageNum) => {
@@ -29,6 +30,21 @@ const Products = () => {
     .catch(err => err)
   };
 
+  const getAllcategory = async () =>{
+    await api.getCategory()
+    .then(resp =>{
+      const { categories, status } = resp.data;
+
+      if(status){
+        setCategories(categories)
+      }else{
+        setCategories([])
+      }
+    })
+    .catch(err => console.log(err))
+  };
+
+  useEffect(() =>{getAllcategory()},[])
   //call the getAllProducts fun when the user add new item
   useEffect(() =>{
     getAllProducts(currentPage)
@@ -43,9 +59,8 @@ const Products = () => {
       ToastNoti('one product deleted')
     })
     .catch(err => console.log(err))
-  }
+  };
 
-  
   const handleForm =() => setShowForm(!showForm);
 
   if(isLoading){
@@ -60,7 +75,7 @@ const Products = () => {
         </div>
 
       {
-        showForm && <AddForm handleForm={handleForm} ToastNoti={ToastNoti} />
+        showForm && <AddForm handleForm={handleForm} ToastNoti={ToastNoti} categories={categories} />
       }
     <main className='w-[95%] p-3 h-full'>
 

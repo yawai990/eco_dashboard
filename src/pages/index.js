@@ -7,3 +7,4 @@ export { default as EmployeeDetail } from './EmployeeDetail';
 export { default as Login } from './Login';
 export { default as ProductEdit } from './ProductEdit';
 export { default as OrderDetails } from './OrderDetails';
+export { default as Category } from './Category';

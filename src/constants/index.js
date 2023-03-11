@@ -16,7 +16,12 @@ export const navLinkLists = [
         path : '/products',
         },
     {
-        id : 4,
+        id :4,
+        name : 'category',
+        path : '/category',
+        },
+    {
+        id : 5,
         name : 'settings',
         path : '/settings',
 

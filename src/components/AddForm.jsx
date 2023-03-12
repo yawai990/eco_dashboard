@@ -6,7 +6,7 @@ import { TiTimes } from 'react-icons/ti';
 import * as api from '../api';
 import { uploadImageCloudinary } from '../pages/utils/utils';
 
-const AddForm = ({ handleForm, ToastNoti, categories}) => {
+const AddForm = ({ handleForm, ToastNoti, categories, setProductAdd }) => {
 
 
   const handleSubmit =async(e) =>{
@@ -16,11 +16,10 @@ const AddForm = ({ handleForm, ToastNoti, categories}) => {
 
     const productName = element.p_name.value;
     const productBrand = element.p_brand.value;
-    const productCategory = Number(element.p_category.value);
+    const productCategory = element.p_category.value;
     const productPrice = Number(element.p_price.value);
     const productStock = Number(element.p_stock.value);
     const productImages = element.p_image;
-
 
    const productData ={productName,productBrand,productCategory,productPrice,productStock};
 
@@ -33,6 +32,7 @@ const AddForm = ({ handleForm, ToastNoti, categories}) => {
           .then(resp =>{
             if(resp.data.success){
               ToastNoti('One Product Added')
+              setProductAdd(prev => !prev)
             }
           })
         .catch(err => console.log(err))

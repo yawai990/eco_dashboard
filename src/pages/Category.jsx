@@ -11,11 +11,14 @@ const Category = () => {
     const [ Error , setError ] = useState(false);
     const [ saveToDB , setSaveToDB ] = useState(false);
     const [ deleteCat, setDeleteCat ] = useState(false);
+    const [ products , setProducts ] = useState([]);
     const { isLoading, error, data } = useQuery(['repoData',saveToDB,deleteCat],async () =>
     await api.getCategory()
     .then(resp => {
-        const { status , categories } = resp.data;
+        const { status , categories, products } = resp.data;
+        
         if(status){
+            setProducts(products)
             return categories
         }else new Error('there is no category')
     })
@@ -74,7 +77,7 @@ const Category = () => {
         }
     })
     .catch(err => console.log(err))
-  }
+  };
 
    if(isLoading) return <Loading />
   
@@ -102,8 +105,12 @@ const Category = () => {
                data.length > 0 ? data?.map(d => (
                 <div className='grid grid-cols-4 text-center py-3 border-b border-stone-200 capitalize tracking-wider' key={d._id}>   
                        <div>{d.category}</div>                 
-                       <div>45</div>                 
-                       <div>$4523</div>        
+                       <div>{products.filter(p => p.category === d.category ? p:null).length}</div>                 
+                       <div>${
+                        products.filter(p => p.category === d.category ? p:null).reduce((acc,curVal) =>{
+                            return acc + (curVal.price * curVal.sales)
+                          },0)
+                        }</div>        
                        <div>
                        <button onClick={() => handleDeleteCategory(d._id)}>
                           <AiFillCloseCircle className='text-primary text-3xl' />

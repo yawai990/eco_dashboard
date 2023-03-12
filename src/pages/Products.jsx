@@ -48,7 +48,7 @@ const Products = () => {
   //call the getAllProducts fun when the user add new item
   useEffect(() =>{
     getAllProducts(currentPage)
-  },[currentPage])
+  },[currentPage,productAdd])
 
   const deleteProduct = async (id, token)=>{
     setIsLoading(true)
@@ -75,7 +75,7 @@ const Products = () => {
         </div>
 
       {
-        showForm && <AddForm handleForm={handleForm} ToastNoti={ToastNoti} categories={categories} />
+        showForm && <AddForm handleForm={handleForm} ToastNoti={ToastNoti} categories={categories} setProductAdd={setProductAdd} />
       }
     <main className='w-[95%] p-3 h-full'>
 
@@ -88,6 +88,7 @@ const Products = () => {
     <div className='bg-primary py-1 px-3 rounded-md shadow-sm text-white'>
       <Button btnText={'add products'} btnfun={handleForm} />
     </div>
+
     </div>
 
     <main className='mt-6'>

@@ -15,6 +15,9 @@ const Employee = () => {
     </div>
 
     <div className='w-full overflow-x-scroll mt-4'> 
+
+    {/* cloud image router */}
+    {/* 'https://res.cloudinary.com/dtcws1ecu/image/upload/v1678608221/ecommerV2/employee' */}
           <Table colData={employeeColName} rowData={employeeData} border clickFun={employeeDetail} />
         </div>
 

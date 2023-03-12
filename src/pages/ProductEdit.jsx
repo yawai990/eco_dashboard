@@ -1,7 +1,8 @@
 import React,{ useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { Text, Button, ProductCard, AddForm, Pagination, Loading } from '../components';
+import { TiArrowBack } from 'react-icons/ti';
+import {  Button, Loading } from '../components';
 import * as api from '../api';
 
 const ProductEdit = () => {
@@ -67,9 +68,15 @@ const ProductEdit = () => {
   return (
     <div className="w-full h-full relative">
 
+     <button 
+          onClick={() => history.back()}
+          className='bg-primary w-10 h-10 flex justify-center items-center text-4xl text-stone-100 rounded-full'>
+            <TiArrowBack />
+            </button>
+
         <ToastContainer position="bottom-right" />
 
-    <form onSubmit={handleUpdateSumbit} className='w-full mt-5 bg-stone-100'>
+    <form onSubmit={handleUpdateSumbit} className='w-full mt-5 bg-stone-100 rounded'>
 
       <div className="flex justify-around p-2 rounded">
         <div className='w-2/6 h-[350px] p-2'>

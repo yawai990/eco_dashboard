@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Text } from '../components';
-import { employeeData } from '../components/data/Table';
 import { TiArrowBack } from 'react-icons/ti';
 import { BsPencil } from 'react-icons/bs';
 import { InputLabel } from '../components';

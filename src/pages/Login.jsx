@@ -7,10 +7,12 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const Login = ({setIsLogin}) => {
   const navigate = useNavigate();
+  const [ loading, setLoading ] = useState(false);
   const [ error, setError ] = useState('');
 
   const handleLogin = async (e) =>{
     e.preventDefault();
+    setLoading(true)
 
     const elements = e.currentTarget.elements;
     const email = elements.login_email.value;
@@ -18,6 +20,7 @@ const Login = ({setIsLogin}) => {
 
     await api.loginUser({ email, password})
     .then(resp => {
+      setLoading(false)
       if(resp.data.userLoggedIn.isAdmin){
         toast.success("You're successfully logged in");
 
@@ -66,7 +69,7 @@ const Login = ({setIsLogin}) => {
         <Button btnType={'button'} btnIcon={<BsEyeSlash />} btnBg='white' rounded rectangle size={24}/>
         </div>
 
-        <Button btnText={'log in'} btnBg={'#FB2576'} btnColor='white' />
+        <Button btnText={loading ? 'Loading...':'log in'} btnBg={'#FB2576'} btnColor='white' />
         </form>
         </div>
     </section>

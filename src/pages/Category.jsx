@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query';
 import * as api from '../api';
-import { Loading,InputLabel, Button } from '../components';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import { Loading,InputLabel, Button, Text } from '../components';
+import { toast } from 'react-toastify';
 
 const Category = () => {
-    const [ currentMode, setCurrentMode ] = useState('list')
-    const { isLoading, error, data } = useQuery('repoData',async () =>
+    const [ currentMode, setCurrentMode ] = useState('list');
+    const [ newCat, setNewCat ] = useState([]);
+    const [ Error , setError ] = useState(false);
+    const [ saveToDB , setSaveToDB ] = useState(false);
+    const [ deleteCat, setDeleteCat ] = useState(false);
+    const { isLoading, error, data } = useQuery(['repoData',saveToDB,deleteCat],async () =>
     await api.getCategory()
     .then(resp => {
         const { status , categories } = resp.data;
@@ -16,9 +22,61 @@ const Category = () => {
     .catch(err => err)
   );
 
-  const setMode = e => setCurrentMode(e.target.value)
+  const setMode = e => setCurrentMode(e.target.value);
 
-  if(isLoading) return <Loading />
+  const handleSubmit = e =>{
+    e.preventDefault();
+    const elements = e.currentTarget.elements;
+
+    const newCategory = elements.new_category.value;
+
+    if(newCategory){
+        if(newCat.length < 1 ){
+            setNewCat([{ category : newCategory}]);
+            setError(false)
+        }else{
+            setNewCat([...newCat, { category : newCategory} ]);
+            setError(false)
+        }
+    }else{
+        setError(true)
+    }
+    elements.new_category.value = '';
+  };
+
+  const handleRemoveCat = (e) => {
+   
+   const cat =  newCat.filter(cat => cat.category !== e);
+
+   setNewCat(cat)
+  };
+
+  const SaveCategory =async () =>{
+    await api.addCategory(newCat)
+    .then(resp => {
+        const { message , status } = resp.data;
+        if(status){
+            setSaveToDB(!saveToDB)
+            toast(message)
+            setNewCat([]);
+        }
+    })
+    .catch(err => console.log(err));
+  };
+
+  const handleDeleteCategory = async(id)=>{
+    await api.deleteCategory(id)
+    .then(resp=>{
+        const { status, message } = resp.data;
+        if(status){
+            toast(message)
+            setDeleteCat(!deleteCat)
+        }
+    })
+    .catch(err => console.log(err))
+  }
+
+   if(isLoading) return <Loading />
   
   return (
     <div className="w-full mt-5 rounded overflow-hidden bg-white">
@@ -32,28 +90,74 @@ const Category = () => {
 
     {
         currentMode === 'list' ? <>
-        <div className='grid grid-cols-3 text-center bg-blue-200 py-4'>   
+        <div className='grid grid-cols-4 text-center bg-blue-200 py-4'>   
                 <div>Product Category</div>
                 <div>Total Products</div>
                 <div>Total Revenue by Category</div>
+                <div></div>
         </div>
 
         <section className='bg-slate-100'>
            {
-               data?.map(d => (
-                <div className='grid grid-cols-3 text-center py-3 border-b border-stone-200 capitalize tracking-wider' key={d._id}>   
+               data.length > 0 ? data?.map(d => (
+                <div className='grid grid-cols-4 text-center py-3 border-b border-stone-200 capitalize tracking-wider' key={d._id}>   
                        <div>{d.category}</div>                 
                        <div>45</div>                 
-                       <div>$4523</div>                 
+                       <div>$4523</div>        
+                       <div>
+                       <button onClick={() => handleDeleteCategory(d._id)}>
+                          <AiFillCloseCircle className='text-primary text-3xl' />
+                        </button>
+                        </div>         
                 </div>  
             ))
+            :
+            <div className='py-2'>There is no category</div>
            }
         </section>
         </>:
-         currentMode === 'new category' && <form>
-                <InputLabel label={'New category'} placeholder="new category" name='new_category' inputType={'text'} />
-                <Button btnText='add new category' btnBg='#FB2576' btnColor={'white'} />
-            </form>
+         currentMode === 'new category' && <main className='flex gap-3'>
+                <form onSubmit={handleSubmit} className='min-w-[400px]'>
+                        <InputLabel 
+                        label={'New category'} 
+                        placeholder="new category" 
+                        name='new_category' 
+                        inputType={'text'} />
+                        {
+                            Error && <p className='text-red-500 text-sm mb-3'>Please write category name</p>
+                        }
+                        <Button 
+                        btnText='add new category' 
+                        btnBg='#FB2576' 
+                        btnColor={'white'} />
+                    </form>
+
+                    <section>   
+                            <Text title={'New Categories List'} size={18} />
+
+                            <main className='min-w-[280px] bg-slate-100 mt-2 rounded mb-3'>
+                                <div className='py-1 text-center'>
+                                <Text title={'Category Name'} />
+                                </div>
+                                {
+                                    newCat?.map((cat,idx)=>(
+                                        <div key={`new_cat-${idx}`} className='animate py-2 px-3 mb-2 border-b border-slate-400 pl-2 lowercase flex justify-between'>
+                                            <p>{cat.category}</p>
+                                            <button onClick={() => handleRemoveCat(cat.category)}>
+                                                <AiFillCloseCircle className='text-primary text-3xl' />
+                                            </button>
+                                            </div>
+                                    ))
+                                }
+                            </main>
+
+                            <Button 
+                            btnfun={SaveCategory}
+                                btnText='Save category' 
+                                btnBg='#FB2576' 
+                                btnColor={'white'} />
+                    </section>
+        </main>
     }
         
     </div>

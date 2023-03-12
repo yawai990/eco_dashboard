@@ -19,6 +19,7 @@ const Table = ({ colData, rowData, border, clickFun }) => {
       <tbody>
           {
             rowData.length > 0 ? rowData?.map((row,idx) =>{
+    
               const rowKey = Object.keys(row);
             return  <tr key={row._id || idx } className='capitalize text-center text-[#2B4865] font-semibold border-b border-stone-200 hover:bg-stone-100 cursor-pointer'
             onClick={() => clickFun(row._id)}
@@ -31,7 +32,10 @@ const Table = ({ colData, rowData, border, clickFun }) => {
                     
                     {
                       key === 'image' ? <img 
-                      src={`${row[key][0].path !== undefined ? 'https://res.cloudinary.com/dtcws1ecu/image/upload/v1675567949/' + row[key][0].path:row.image}`}
+                      src={`${row[key][0].path !== undefined ? 
+                        'https://res.cloudinary.com/dtcws1ecu/image/upload/v1675567949/' + row[key][0].path 
+                        :
+                        'https://res.cloudinary.com/dtcws1ecu/image/upload/v1678608221/ecommerV2/employee' + row.image}`}
                        alt="" 
                        className={`w-12 h-12 object-cover block mx-auto ${row[key][0].path === undefined && 'rounded-full object-cover'}`} />
                        :

@@ -41,3 +41,6 @@ export const getSingleOrder = (id) => API.get(`orders/getsingleorder/${id}`);
 export const totalSalesRevenue = (year) => API.get(`orders/totalsales?year=${year}`);
 export const bestSellers = () => API.get('products/bestsellers');
 export const MakeDelivered = (id, data) => API.put(`orders/makedeliver/${id}`, data);
+
+//employee
+export const AllEmployee = () => API.get('employee/allemployees');

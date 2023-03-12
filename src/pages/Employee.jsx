@@ -1,10 +1,34 @@
-import React from 'react';
-import { Text, Table } from '../components';
+import React, { useState,useEffect } from 'react';
+import { Text, Table, Loading } from '../components';
 import { employeeColName, employeeData } from '../components/data/Table';
 import { useNavigate } from 'react-router-dom';
+import * as api from '../api';
 
 const Employee = () => {
   const navigate =useNavigate();
+  const [ employeeData, setEmployeeData ] = useState([]);
+  const [ isLoading, setIsLoading ] = useState(false);
+
+  const getEmployee = async () =>{
+    setIsLoading(true)
+    await api.AllEmployee()
+    .then(resp => {
+      const { status , employees  } = resp.data;
+      if(status){
+        setIsLoading(false)
+        setEmployeeData(employees)
+      }
+    })
+    .catch(err => err)
+  }
+
+  useEffect(() =>{
+    getEmployee()
+  },[]);
+
+  if(isLoading){
+    return <Loading />
+  }
 
   const employeeDetail = id => navigate(`/employee/${id}`);
   return (
@@ -16,8 +40,6 @@ const Employee = () => {
 
     <div className='w-full overflow-x-scroll mt-4'> 
 
-    {/* cloud image router */}
-    {/* 'https://res.cloudinary.com/dtcws1ecu/image/upload/v1678608221/ecommerV2/employee' */}
           <Table colData={employeeColName} rowData={employeeData} border clickFun={employeeDetail} />
         </div>
 

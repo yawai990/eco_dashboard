@@ -54,6 +54,7 @@ const Table = ({ colData, rowData, border, clickFun }) => {
                       key === 'user'  ?
                        row[key].name : 
                        key === 'payment' ? row[key] === 0 ? "MPU" : row[key] === 1 ? 'COD':"M-Banking":
+                       key === 'salary' ? `$${Intl.NumberFormat('en-us').format(row[key])}`:
                        row[key] 
                        
                        }

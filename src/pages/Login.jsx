@@ -69,7 +69,7 @@ const Login = ({setIsLogin}) => {
         <Button btnType={'button'} btnIcon={<BsEyeSlash />} btnBg='white' rounded rectangle size={24}/>
         </div>
 
-        <Button btnText={loading ? 'Loading...':'log in'} btnBg={'#FB2576'} btnColor='white' />
+        <Button disabled={loading ? true:false} btnText={loading ? 'Loading...':'log in'} btnBg={'#FB2576'} btnColor='white' />
         </form>
         </div>
     </section>

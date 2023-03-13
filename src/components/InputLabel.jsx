@@ -1,9 +1,9 @@
 import React from 'react'
 
-const InputLabel = ({ required,multiple,name,label,inputValue,px,py,bold, inputType,capitalize, placeholder, no_margin , no_border}) => {
+const InputLabel = ({ required,multiple,name,label,inputValue,px,py,bold,size, inputType,capitalize, placeholder, no_margin , no_border}) => {
   return (
     <div className='w-full md:min-w-[50%] mb-2'>
-    <label htmlFor={name} className={`w-full ${!no_margin && 'mb-2'} block text-lg tracking-wider font-semibold capitalize`}>{label}</label>
+    <label htmlFor={name} className={`w-full ${!no_margin && 'mb-2'} block ${size ? `text-[${size}px]}`:'text-lg'} tracking-wider font-semibold capitalize`}>{label}</label>
     <input name={name} id={name}
     multiple
      type={inputType} placeholder={placeholder}

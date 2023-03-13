@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-import { Button, Text } from '../components';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import * as api from '../api';
+import { Button, Loading, Text } from '../components';
 import { TiArrowBack } from 'react-icons/ti';
 import { BsPencil } from 'react-icons/bs';
 import { InputLabel } from '../components';
@@ -7,9 +10,25 @@ import { PersonalInfo, Document, AdditionalData, Workdata } from '../components/
 
 const EmployeeDetail = () => {
   const [personCurInfo , setpersonCurInfo ] = useState(0);
+  const { pathname } = useLocation();
+
+  const { isLoading, data } = useQuery([''],async() => {
+    return await api.SingleEmployee(pathname.split('/').slice(-1)[0])
+    .then(resp =>{
+      const { status, employee } = resp.data;
+     if(status){
+      return employee
+      }
+    })
+    .catch(err =>err)
+  })
 
   const handlePersonInfo = idx => setpersonCurInfo(idx);
 
+    if(isLoading) {
+    return  <Loading />
+    };
+    
    return (
     <section className="w-full p-3 flex justify-center items-start">
 
@@ -27,7 +46,7 @@ const EmployeeDetail = () => {
       <main className='w-full md:w-[25%]'>
 
         <div className='w-[60%] md:w-full p-2 relative'>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRawbu2JrjklDXztzp3XKgvUu3C-9pvV6jdCQ&usqp=CAU" alt="employee_image" className='w-full h-full object-contain rounded-md' />
+          <img src={`https://res.cloudinary.com/dtcws1ecu/image/upload/v1678608221/ecommerV2/employee${data.image}`} alt="employee_image" className='w-full h-full object-contain rounded-md' />
 
           <div className='w-8 h-8 bg-white drop-shadow-md text-black absolute top-0 right-0 flex justify-center items-center rounded-full'>
           <button>
@@ -36,7 +55,7 @@ const EmployeeDetail = () => {
           </div>
         </div>
 
-        <Text title={'Thomas Smith'} center />
+        <Text title={data.name} center capitalize />
 
         <div className='flex justify-center items-center my-2'>
 
@@ -49,23 +68,19 @@ const EmployeeDetail = () => {
           <section className='px-3'>
 
           <div className='bg-stone-100 rounded mt-3 px-2'>
-        <InputLabel label={'staff ID'} bold no_border no_margin px py capitalize inputValue={'HR-0067'} />  
+        <InputLabel label={'staff ID'} bold no_border no_margin px py capitalize inputValue={data.HRCode} />  
         </div>
 
           <div className='bg-stone-100 rounded mt-3 px-2'>
-        <InputLabel label={'rank'} bold no_border no_margin px py capitalize inputValue={'manager'} />  
+        <InputLabel label={'rank'} bold no_border no_margin px py capitalize inputValue={data.rank} />  
         </div>
 
           <div className='bg-stone-100 rounded mt-3 px-2'>
-        <InputLabel label={'department'} bold no_border no_margin px py capitalize inputValue={'Sale & Marketting'} />  
+        <InputLabel label={'department'} bold no_border no_margin px py capitalize inputValue={data.dept} />  
         </div>
 
           <div className='bg-stone-100 rounded mt-3 px-2'>
-        <InputLabel label={'department'} bold no_border no_margin px py capitalize inputValue={'Sale & Marketting'} />  
-        </div>
-
-          <div className='bg-stone-100 rounded mt-3 px-2'>
-        <InputLabel label={'admission date'} bold no_border no_margin px py capitalize inputValue={'20-10-2013'} />  
+        <InputLabel label={'admission date'} bold no_border no_margin px py capitalize inputValue={data.employmentDate} />  
         </div>
 
           </section>
@@ -83,7 +98,7 @@ const EmployeeDetail = () => {
             <Button btnText={'additional data'} borderBottom={personCurInfo === 3} bold btnfun={() =>handlePersonInfo(3)} />
           </div>
 
-          {personCurInfo === 0 && <PersonalInfo />}
+          {personCurInfo === 0 && <PersonalInfo data={data} />}
           {personCurInfo === 1 && <Document />}
           {personCurInfo === 2 && <Workdata />}
           {personCurInfo === 3 && <AdditionalData />}

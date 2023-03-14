@@ -1,11 +1,66 @@
-import React,{ useState } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { Button, Text, InputLabel } from '../components';
 import { TiArrowBack } from 'react-icons/ti';
 import { AiFillQuestionCircle } from 'react-icons/ai';
-import FileBase64 from 'react-file-base64';
+import Select from 'react-select';
+import * as api from '../api';
+import countries from '../components/data/country.json';
+import { languages, gender } from '../components/data/data';
+import { uploadImageCloudFromEmploye } from './utils/utils';
 
 const Addnewemployee = () => {
   const [ staffImg, setStaffImg ] = useState('');
+  const [ preview, setPreview ] = useState('');
+  const [ selectedData, setSelectedData ] = useState({country : '', language : '', gender:''});
+
+  // const handleSubmit = async(e)=>{
+  //   e.preventDefault();
+    
+  //   const elements = e.target.elements;
+
+  //   const name = elements.employee_name.value;
+  //   const photo = elements.photo;
+  //   try {
+  //     await uploadImageCloudFromEmploye(photo.files[0])
+  //     .then(async (resp) => {
+  //       if(resp.status === 200 && resp.statusText === 'OK'){
+  //         // await api
+  //         // call add new employee router
+  //       }
+  //     })
+  //     .catch(err => console.log(err))
+      
+  //   } catch (error) {
+      
+  //   }
+  //  const objectUrl = URL.createObjectURL(photo.files[0])
+  //  setPreview(objectUrl)
+  // setPreview(photo.files[0])
+  // }
+
+  useEffect(() => {
+    if (!staffImg) {
+        setPreview(undefined)
+        return
+    }
+
+    const objectUrl = URL.createObjectURL(staffImg)
+    setPreview(objectUrl)
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl)
+}, [staffImg]);
+
+  const onSelectFile = e => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setStaffImg(undefined)
+        return
+    }
+
+    // I've kept this example simple by using the first image instead of multiple
+    setStaffImg(e.target.files[0])
+};
+
 
   return (
     <section className="w-full p-3 flex justify-center items-start">
@@ -31,28 +86,43 @@ const Addnewemployee = () => {
 
        <main className='w-[50%]'>
 
-          <InputLabel inputType={'text'} size={15} label={'Name/Sirname'} />
+          <InputLabel inputType={'text'} name='employee_name' size={15} label={'Name/Sirname'} />
 
-          <section className='w-full flex'>
+          <section className='w-full'>
+
+            <main className='flex'>
 
           <div className='w-[40%] flex justify-center items-center'>
-           <img src={staffImg || '/profile.jpg'} className='block w-[80%] h-[80%] max-h-[180px] object-cover rounded' />
+           <img src={preview || '/profile.jpg'} className='block w-[160px] h-[160px] max-h-[180px] border-4 border-slate-400 object-cover rounded-full' />
           </div>
 
           <div className='w-[60%]'>
           <InputLabel inputType={'text'} size={15} label={'birth day'} />
 
-          <div className='flex gap-1'>
-          <InputLabel inputType={'text'} size={15} label={'language'} />
-          <InputLabel inputType={'text'} size={15} label={'gender'} />
-          </div>
+          <SeleteControl title={'language'} data={languages} name='language' setSelectedData={setSelectedData} selectedData={selectedData} />
 
-          <div>
+         <SeleteControl title={'Gender'} data={gender} name='gender' setSelectedData={setSelectedData} selectedData={selectedData} />
+    
+          <div className='mb-2'>
             <Text title={'staff image'} capitalize />
-          <FileBase64 name='img' type='file' multiple={ false } onDone={e=>setStaffImg(e.base64)}  />
+          {/* <FileBase64 name='img' type='file' multiple={ false } onDone={e=>setStaffImg(e.base64)}  /> */}
+          <div className='border p-1 mt-2 border-neutral-400 rounded overflow-hidden'>
+          <input name='photo' type={'file'} multiple={false} onChange={onSelectFile} />
+          </div>
           </div>
 
           </div>
+
+          </main>
+
+          {
+            ['salary','position','staff ID','city'].map((d,idx)=> <InputLabel
+             inputType={d==='salary' ? 'number':'text'} 
+             size={15} 
+             label={d}
+             key={`${d}-${idx}`}
+             />)
+          }
 
           </section>
 
@@ -60,13 +130,16 @@ const Addnewemployee = () => {
 
        <main className='w-[50%]'>
 
-       <InputLabel inputType={'text'} size={15} label={'address'} />
-       <InputLabel inputType={'text'} size={15} label={'phone number'} />
-       
-       <div className="w-full flex gap-1 justify-between">
-       <InputLabel inputType={'text'} size={15} label={'mail address'} />
-       <InputLabel inputType={'text'} size={15} label={'nationality'} />
-       </div>
+        {
+          ['address','phone number','mail address'].map((d,idx) => <InputLabel inputType={'text'} size={15} label={d} key={`${d}-${idx}`} />)
+        }
+
+
+      <SeleteControl title={'Nationality'} data={countries} name='country' setSelectedData={setSelectedData} selectedData={selectedData} />
+
+      {
+          ['employment date','department','phone','state'].map((d,idx) => <InputLabel inputType={'text'} size={15} label={d} key={`${d}-${idx}`} />)
+        }
 
        </main>
        </div>
@@ -79,6 +152,25 @@ const Addnewemployee = () => {
    </main>
    </section>
   )
+}
+
+const SeleteControl = ({ title, data,selectedData,name, setSelectedData })=>{
+      return <div className='mt-2'>
+      <Text title={title} />
+      <div className='mt-2'>
+    <Select options={data} 
+    onChange={e=>setSelectedData({...selectedData, [name]:e.value})} 
+    theme={(theme) => ({
+      ...theme,
+      borderRadius: 5,
+      colors: {
+        ...theme.colors,
+        primary25: '#FB2576',
+        primary: '#FB2576',
+      },
+    })} />
+    </div>
+    </div>
 }
 
 export default Addnewemployee

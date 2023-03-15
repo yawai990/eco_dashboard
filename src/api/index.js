@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://ecodashboard-backend.onrender.com/api'
-    // baseURL : 'http://localhost:5000/api'
+    // baseURL: 'https://ecodashboard-backend.onrender.com/api'
+    baseURL: 'http://localhost:5000/api'
 });
 
 API.interceptors.request.use(req => {
@@ -45,3 +45,4 @@ export const MakeDelivered = (id, data) => API.put(`orders/makedeliver/${id}`, d
 //employee
 export const AllEmployee = () => API.get('employee/allemployees');
 export const SingleEmployee = (id) => API.get(`employee/singleemployee/${id}`);
+export const addNewEmployee = (data) => API.post('employee/addnewemployee', data);

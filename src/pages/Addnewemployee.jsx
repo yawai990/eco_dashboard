@@ -1,4 +1,5 @@
 import React,{ useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Text, InputLabel } from '../components';
 import { TiArrowBack } from 'react-icons/ti';
 import { AiFillQuestionCircle } from 'react-icons/ai';
@@ -7,36 +8,61 @@ import * as api from '../api';
 import countries from '../components/data/country.json';
 import { languages, gender } from '../components/data/data';
 import { uploadImageCloudFromEmploye } from './utils/utils';
+import DatePicker from 'react-date-picker';
+import { toast } from 'react-toastify';
+
 
 const Addnewemployee = () => {
   const [ staffImg, setStaffImg ] = useState('');
   const [ preview, setPreview ] = useState('');
-  const [ selectedData, setSelectedData ] = useState({country : '', language : '', gender:''});
-
-  // const handleSubmit = async(e)=>{
-  //   e.preventDefault();
+  const navigate = useNavigate();
+  const [ selectedData, setSelectedData ] = useState({nationality : '', language : '', gender:'', birthDate:'',employmentDate:''});
+ 
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
     
-  //   const elements = e.target.elements;
+    const elements = e.target.elements;
 
-  //   const name = elements.employee_name.value;
-  //   const photo = elements.photo;
-  //   try {
-  //     await uploadImageCloudFromEmploye(photo.files[0])
-  //     .then(async (resp) => {
-  //       if(resp.status === 200 && resp.statusText === 'OK'){
-  //         // await api
-  //         // call add new employee router
-  //       }
-  //     })
-  //     .catch(err => console.log(err))
+    const name = elements.employee_name.value;
+    const address =elements.address.value;
+    const position =elements.position.value;
+    const staffID =elements.staffID.value;
+    const city =elements.city.value;
+    const phone =elements.phoneNumber.value;
+    const email =elements.email.value;
+    const state =elements.state.value;
+    const dept =elements.department.value;
+    const salary =elements.salary.value;
+    const photo = elements.photo;
+
+    const staffData = {...selectedData,name,address,salary,rank : position,HRCode : staffID,city,phone,email,state, dept}
+    try {
+      await uploadImageCloudFromEmploye(photo.files[0])
+      .then(async (resp) => {
+        if(resp.status === 200 && resp.statusText === 'OK'){
+          await api.addNewEmployee({...staffData,image:`/${resp.data.public_id.split('/').slice(-1)}.${resp.data.format}`})
+          .then(resp => {
+            console.log(resp)
+            const { status , message } = resp.data
+            if(status){
+              toast(message);
+              setPreview('')
+              setPreview('')
+              navigate('/employees')
+            }
+          })
+          .catch(err => console.log(err))
+        }
+      })
+      .catch(err => console.log(err))
       
-  //   } catch (error) {
-      
-  //   }
+    } catch (error) {
+      toast(error)
+    }
   //  const objectUrl = URL.createObjectURL(photo.files[0])
   //  setPreview(objectUrl)
-  // setPreview(photo.files[0])
-  // }
+  //  setPreview(photo.files[0])
+  }
 
   useEffect(() => {
     if (!staffImg) {
@@ -80,7 +106,7 @@ const Addnewemployee = () => {
         </button>
     </div>
 
-    <form className='mt-3 bg-[#fff] p-4 drop-shadow rounded'>
+    <form className='mt-3 bg-[#fff] p-4 drop-shadow rounded' onSubmit={handleSubmit}>
 
       <div className='flex gap-2'>
 
@@ -97,7 +123,13 @@ const Addnewemployee = () => {
           </div>
 
           <div className='w-[60%]'>
-          <InputLabel inputType={'text'} size={15} label={'birth day'} />
+          
+          <div className=''>
+          <div className='mb-2'>
+          <Text title={'Birth Day'} />
+          </div>
+          <DatePicker className='w-full' onChange={e=>setSelectedData({...selectedData,birthDate:e})} format='dd-MM-y' name='birthDate' value={selectedData.birthDate} />
+        </div>
 
           <SeleteControl title={'language'} data={languages} name='language' setSelectedData={setSelectedData} selectedData={selectedData} />
 
@@ -116,10 +148,11 @@ const Addnewemployee = () => {
           </main>
 
           {
-            ['salary','position','staff ID','city'].map((d,idx)=> <InputLabel
-             inputType={d==='salary' ? 'number':'text'} 
+            ['salary','position','staffID'].map((d,idx)=> <InputLabel
+             inputType={d === 'salary' ? 'number':'text'} 
              size={15} 
              label={d}
+             name={d}
              key={`${d}-${idx}`}
              />)
           }
@@ -131,14 +164,22 @@ const Addnewemployee = () => {
        <main className='w-[50%]'>
 
         {
-          ['address','phone number','mail address'].map((d,idx) => <InputLabel inputType={'text'} size={15} label={d} key={`${d}-${idx}`} />)
+          ['address','phoneNumber','email'].map((d,idx) => <InputLabel inputType={ d === 'phone number' ? 'number':'text'} name={d} size={15} label={d} key={`${d}-${idx}`} />)
         }
 
+        <div className='my-2'>
+      <SeleteControl title={'Nationality'} data={countries} name='nationality' setSelectedData={setSelectedData} selectedData={selectedData} />
+        </div> 
 
-      <SeleteControl title={'Nationality'} data={countries} name='country' setSelectedData={setSelectedData} selectedData={selectedData} />
+        <div className='my-2'>
+          <div className='mb-2'>
+          <Text title={'Employment Date'} />
+          </div>
+          <DatePicker className='w-full' onChange={e=>setSelectedData({...selectedData,employmentDate:e})} format='dd-MM-y' value={selectedData.employmentDate} />
+        </div>
 
       {
-          ['employment date','department','phone','state'].map((d,idx) => <InputLabel inputType={'text'} size={15} label={d} key={`${d}-${idx}`} />)
+          ['department','state', 'city'].map((d,idx) => <InputLabel name={d} inputType={'text'} size={15} label={d} key={`${d}-${idx}`} />)
         }
 
        </main>

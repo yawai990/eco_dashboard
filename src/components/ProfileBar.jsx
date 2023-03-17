@@ -1,26 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BsBell } from 'react-icons/bs';
 import Button from './Button';
+import { useQuery } from 'react-query';
+import * as api from '../api';
+import moment from 'moment/moment';
+import { TiTimes } from 'react-icons/ti';
 
 const ProfileBar = () => {
+  const [ showNoti, setShowNoti ] = useState(false);
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  
+
+  const handleNoti = () => setShowNoti(!showNoti); // need to updated the  notification 
+
+  const getNoti = async()=>{
+   return await api.Notification()
+    .then(resp => {
+      const { status, notifications } = resp.data;
+
+      if(status) {
+        return notifications
+      }
+      else null
+    })
+    .catch( err => err)
+  }
+  const { isLoading, error, data } = useQuery([showNoti],() =>getNoti());
+
   return (
     <main className='flex justify-end mt-6'>
     <div className='flex items-center gap-4 text-white px-2 rounded py-1'>
         
         <div className='bg-white drop-shadow rounded-full p-1 relative'>
+          {
+            data?.length > 0 &&
           <div className='w-2 h-2 bg-red-400 rounded-full absolute top-1 right-1'></div>
-          <Button btnIcon={<BsBell />} btnColor={'black'} size={18} rectangle />
+          }
+          <Button btnfun={handleNoti} btnIcon={<BsBell />} btnColor={'black'} size={18} rectangle />
 
-           {/* <div className='min-w-[300px] absolute bg-white drop-shadow text-stone-700 top-12 -translate-x-1/2 px-3 py-2 rounded'>
+          {
+            showNoti && 
+          <div className='min-w-[300px] absolute bg-white drop-shadow text-stone-700 top-12 -translate-x-1/2 px-3 py-2 rounded'>
             <div className='w-3 rotate-45 -top-1 left-1/2 translate-x-1 h-3 bg-white absolute'></div>
-            
-           <div className='w-full border-b border-slate-200 pb-2'>
-              <p>new staff added</p>
-              <p className='text-[11px] text-end'>10 minutes ago</p>
+
+            <button onClick={handleNoti} className='ml-auto block p-0.7 hover:drop-shadow-xl rounded-full bg-white drop-shadow'><TiTimes className='text-lg text-red-400' /></button>
+
+            {
+             data ? data?.map(d => (    
+              <div  key={d._id} className='w-full border-b border-slate-200 pb-2 pt-1'>
+                  <p className='first-letter:uppercase text-sm text-clip'>{d.desc}</p>
+                  <p className='text-[11px] text-end'>{moment(d.createdAt).fromNow()}</p>
+                </div>
+              )):
+              <p className='first-letter:uppercase text-sm text-clip'>there is no notification</p>
+            }
             </div>
-          </div> */}
+          }
         </div>
 
         <div className='max-w-[140px] px-3 py-1 flex gap-1 items-center bg-primary rounded'>

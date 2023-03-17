@@ -47,3 +47,6 @@ export const AllEmployee = () => API.get('employee/allemployees');
 export const SingleEmployee = (id) => API.get(`employee/singleemployee/${id}`);
 export const addNewEmployee = (data) => API.post('employee/addnewemployee', data);
 export const updateEmployee = (id,data) => API.post(`employee/updateemployee/${id}`, data);
+
+//notification 
+export const Notification = () => API.get('notification/getnotification');

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import * as api from '../api';
@@ -7,6 +7,7 @@ import { TiArrowBack } from 'react-icons/ti';
 import { BsPencil } from 'react-icons/bs';
 import { InputLabel } from '../components';
 import { PersonalInfo, Document, AdditionalData, Workdata } from '../components/employee';
+import { languages } from '../components/data/data';
 
 const EmployeeDetail = () => {
   const [personCurInfo , setpersonCurInfo ] = useState(0);
@@ -21,7 +22,8 @@ const EmployeeDetail = () => {
       }
     })
     .catch(err =>err)
-  })
+  });
+  
 
   const handlePersonInfo = idx => setpersonCurInfo(idx);
 
@@ -72,7 +74,7 @@ const EmployeeDetail = () => {
         </div>
 
           <div className='bg-stone-100 rounded mt-3 px-2'>
-        <InputLabel label={'rank'} bold no_border no_margin px py capitalize inputValue={data.rank} />  
+        <InputLabel label={'rank'} name='positiom' bold no_border no_margin px py capitalize inputValue={data.rank} />  
         </div>
 
           <div className='bg-stone-100 rounded mt-3 px-2'>

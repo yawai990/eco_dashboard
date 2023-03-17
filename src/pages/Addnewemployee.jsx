@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Text, InputLabel } from '../components';
 import { TiArrowBack } from 'react-icons/ti';
 import { AiFillQuestionCircle } from 'react-icons/ai';
-import Select from 'react-select';
+import SeleteControl from '../components/employee/SelectControl';
 import * as api from '../api';
 import countries from '../components/data/country.json';
 import { languages, gender } from '../components/data/data';
 import { uploadImageCloudFromEmploye } from './utils/utils';
-import DatePicker from 'react-date-picker';
+import * as DatePicker from 'react-date-picker';
+import 'react-date-picker/dist/DatePicker.css';
 import { toast } from 'react-toastify';
 
 
@@ -128,7 +129,7 @@ const Addnewemployee = () => {
           <div className='mb-2'>
           <Text title={'Birth Day'} />
           </div>
-          <DatePicker className='w-full' onChange={e=>setSelectedData({...selectedData,birthDate:e})} format='dd-MM-y' name='birthDate' value={selectedData.birthDate} />
+          <DatePicker className='w-full' maxDate={new Date()} onChange={e=>setSelectedData({...selectedData,birthDate:e})} format='dd-MM-y' name='birthDate' value={selectedData.birthDate} />
         </div>
 
           <SeleteControl title={'language'} data={languages} name='language' setSelectedData={setSelectedData} selectedData={selectedData} />
@@ -164,7 +165,7 @@ const Addnewemployee = () => {
        <main className='w-[50%]'>
 
         {
-          ['address','phoneNumber','email'].map((d,idx) => <InputLabel inputType={ d === 'phone number' ? 'number':'text'} name={d} size={15} label={d} key={`${d}-${idx}`} />)
+          ['address','phoneNumber','email'].map((d,idx) => <InputLabel min={d === 'phone number' ? 9:null} inputType={ d === 'phone number' ? 'number':'text'} name={d} size={15} label={d} key={`${d}-${idx}`} />)
         }
 
         <div className='my-2'>
@@ -175,7 +176,7 @@ const Addnewemployee = () => {
           <div className='mb-2'>
           <Text title={'Employment Date'} />
           </div>
-          <DatePicker className='w-full' onChange={e=>setSelectedData({...selectedData,employmentDate:e})} format='dd-MM-y' value={selectedData.employmentDate} />
+          <DatePicker className='w-full' maxDate={new Date()} onChange={e=>setSelectedData({...selectedData,employmentDate:e})} format='dd-MM-y' value={selectedData.employmentDate} />
         </div>
 
       {
@@ -195,23 +196,5 @@ const Addnewemployee = () => {
   )
 }
 
-const SeleteControl = ({ title, data,selectedData,name, setSelectedData })=>{
-      return <div className='mt-2'>
-      <Text title={title} />
-      <div className='mt-2'>
-    <Select options={data} 
-    onChange={e=>setSelectedData({...selectedData, [name]:e.value})} 
-    theme={(theme) => ({
-      ...theme,
-      borderRadius: 5,
-      colors: {
-        ...theme.colors,
-        primary25: '#FB2576',
-        primary: '#FB2576',
-      },
-    })} />
-    </div>
-    </div>
-}
 
 export default Addnewemployee

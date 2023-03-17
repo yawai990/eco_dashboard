@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { InputLabel, Text, Button } from '../';
+import { languages, gender } from '../data/data';
+import SeleteControl from './SelectControl';
+import countries from '../data/country.json';
 
 const PersonalInfo = ({ data }) => {
+  const [ selectedData, setSelectedData ] = useState({nationality : '', language : '', gender:'', birthDate:'',employmentDate:''});
+
   return (
     <>
         <section>
@@ -18,24 +23,26 @@ const PersonalInfo = ({ data }) => {
             <div className='w-[50%] bg-stone-100 rounded mt-3 px-2'>
             <InputLabel label={'Birthdate'} bold no_border no_margin px py inputValue={data.birthDate} />  
             </div>
+
             <div className='w-[50%] bg-stone-100 rounded mt-3 px-2'>
-            <InputLabel label={'nationality'} bold no_border no_margin px py capitalize inputValue={data.nationality} />  
+            <SeleteControl title={'Nationality'} data={countries} disabled value={countries.filter(e=> e.value === data.nationality)[0]} name='nationality' setSelectedData={setSelectedData} selectedData={selectedData} />
             </div>
+
             </div>
 
             <div className="flex justify-between gap-5">
             <div className='w-[50%] bg-stone-100 rounded mt-3 px-2'>
-            <InputLabel label={'Gender'} bold no_border no_margin px py capitalize inputValue={data.gender} />  
+            <InputLabel label={'Gender'} bold no_border no_margin px py capitalize inputValue={gender.filter(l => l.value === data.gender)[0].label} />  
             </div>
            
             </div>
 
             <div className="flex justify-between gap-5">
             <div className='w-[50%] bg-stone-100 rounded mt-3 px-2'>
-            <InputLabel label={'state'} bold no_border no_margin px py capitalize inputValue={data.state} />  
+            <InputLabel label={'state'} name='state' bold no_border no_margin px py capitalize inputValue={data.state} />  
             </div>
             <div className='w-[50%] bg-stone-100 rounded mt-3 px-2'>
-            <InputLabel label={'city'} bold no_border no_margin px py capitalize inputValue={data.city} />  
+            <InputLabel label={'city'} name='city' bold no_border no_margin px py capitalize inputValue={data.city} />  
             </div>
             </div>
             </section>
@@ -55,6 +62,10 @@ const PersonalInfo = ({ data }) => {
 
             <div className='bg-stone-100 rounded mt-3 px-2'>
             <InputLabel label={'address'} bold no_border no_margin px py capitalize inputValue={data.address} />   
+            </div>
+
+            <div className='flex justify-end items-center mt-5'>
+              <Button btnText={'Update Info'} btnBg={'#655DBB'} btnColor='white' />
             </div>
 
             </section>

@@ -9,16 +9,18 @@ const Category = () => {
     const [ currentMode, setCurrentMode ] = useState('list');
     const [ newCat, setNewCat ] = useState([]);
     const [ Error , setError ] = useState(false);
-    const [ saveToDB , setSaveToDB ] = useState(false);
-    const [ deleteCat, setDeleteCat ] = useState(false);
     const [ products , setProducts ] = useState([]);
-    const { isLoading, error, data } = useQuery(['repoData',saveToDB,deleteCat],async () =>
+    const [ deleteMessage, setDeleteMessage ] = useState('');
+    const [ setCat, set_new_cat ] = useState('');
+    const { isLoading, error, data } = useQuery([deleteMessage,setCat],async () =>
     await api.getCategory()
     .then(resp => {
         const { status , categories, products } = resp.data;
         
         if(status){
             setProducts(products)
+            setDeleteMessage('')
+            set_new_cat('')
             return categories
         }else new Error('there is no category')
     })
@@ -59,7 +61,8 @@ const Category = () => {
     .then(resp => {
         const { message , status } = resp.data;
         if(status){
-            setSaveToDB(!saveToDB)
+            setCurrentMode('list')
+            set_new_cat(message)
             toast(message)
             setNewCat([]);
         }
@@ -73,7 +76,7 @@ const Category = () => {
         const { status, message } = resp.data;
         if(status){
             toast(message)
-            setDeleteCat(!deleteCat)
+            setDeleteMessage(message)
         }
     })
     .catch(err => console.log(err))

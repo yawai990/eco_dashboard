@@ -8,7 +8,7 @@ import * as api from '../api';
 import countries from '../components/data/country.json';
 import { languages, gender } from '../components/data/data';
 import { uploadImageCloudFromEmploye } from './utils/utils';
-import * as DatePicker from 'react-date-picker';
+import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import { toast } from 'react-toastify';
 
@@ -87,7 +87,6 @@ const Addnewemployee = () => {
     // I've kept this example simple by using the first image instead of multiple
     setStaffImg(e.target.files[0])
 };
-
 
   return (
     <section className="w-full p-3 flex justify-center items-start">

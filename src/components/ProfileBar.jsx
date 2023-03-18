@@ -1,29 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BsBell } from 'react-icons/bs';
 import Button from './Button';
 import { useQuery } from 'react-query';
 import * as api from '../api';
 import moment from 'moment/moment';
 import { TiTimes } from 'react-icons/ti';
+import Fade from 'react-reveal/Fade';
 
 const ProfileBar = () => {
   const [ showNoti, setShowNoti ] = useState(false);
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
-  const handleNoti = () => setShowNoti(!showNoti); // need to updated the  notification 
-
   const getNoti = async()=>{
    return await api.Notification()
     .then(resp => {
       const { status, notifications } = resp.data;
-
       if(status) {
         return notifications
       }
       else null
     })
     .catch( err => err)
-  }
+  };
+
+  const notiView = async() =>{
+    await api.viewNotification()
+    .then(resp =>{
+      const { status, message } = resp.data;
+      if(status){
+        return message
+      }
+    })
+    .catch(err => err)
+  };
+
+
   const { isLoading, error, data } = useQuery([showNoti],() =>getNoti());
 
   return (
@@ -35,14 +46,19 @@ const ProfileBar = () => {
             data?.length > 0 &&
           <div className='w-2 h-2 bg-red-400 rounded-full absolute top-1 right-1'></div>
           }
-          <Button btnfun={handleNoti} btnIcon={<BsBell />} btnColor={'black'} size={18} rectangle />
-
+          <Button btnfun={() =>setShowNoti(true)} btnIcon={<BsBell />} btnColor={'black'} size={18} rectangle />
           {
             showNoti && 
           <div className='min-w-[300px] absolute bg-white drop-shadow text-stone-700 top-12 -translate-x-1/2 px-3 py-2 rounded'>
-            <div className='w-3 rotate-45 -top-1 left-1/2 translate-x-1 h-3 bg-white absolute'></div>
+            <Fade top opposite>
+            <div style={{
+              rotate:'45deg'
+            }} className='w-3 -top-1 left-1/2 translate-x-1 h-3 rotate-45 bg-white absolute'></div>
 
-            <button onClick={handleNoti} className='ml-auto block p-0.7 hover:drop-shadow-xl rounded-full bg-white drop-shadow'><TiTimes className='text-lg text-red-400' /></button>
+            <button onClick={() =>{
+              setShowNoti(false)
+              notiView()
+              }} className='ml-auto block p-0.7 hover:drop-shadow-xl rounded-full bg-white drop-shadow'><TiTimes className='text-lg text-red-400' /></button>
 
             {
              data ? data?.map(d => (    
@@ -53,8 +69,10 @@ const ProfileBar = () => {
               )):
               <p className='first-letter:uppercase text-sm text-clip'>there is no notification</p>
             }
+            </Fade>
             </div>
           }
+
         </div>
 
         <div className='max-w-[140px] px-3 py-1 flex gap-1 items-center bg-primary rounded'>

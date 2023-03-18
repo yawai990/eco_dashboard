@@ -50,3 +50,4 @@ export const updateEmployee = (id,data) => API.post(`employee/updateemployee/${i
 
 //notification 
 export const Notification = () => API.get('notification/getnotification');
+export const viewNotification = () => API.post('notification/updatenotification');

@@ -49,7 +49,7 @@ const ProfileBar = () => {
           <Button btnfun={() =>setShowNoti(true)} btnIcon={<BsBell />} btnColor={'black'} size={18} rectangle />
           {
             showNoti && 
-          <div className='min-w-[300px] absolute bg-white drop-shadow text-stone-700 top-12 -translate-x-1/2 px-3 py-2 rounded'>
+          <div className='min-w-[250px] absolute bg-white drop-shadow text-stone-700 top-12 -translate-x-1/2 px-3 py-2 rounded'>
             <Fade top opposite>
             <div style={{
               rotate:'45deg'

@@ -21,7 +21,7 @@ const Login = ({setIsLogin}) => {
     await api.loginUser({ email, password})
     .then(resp => {
       setLoading(false)
-      if(resp.data.userLoggedIn.isAdmin){
+      if(resp.data.userLoggedIn.user.isAdmin){
         toast.success("You're successfully logged in");
 
         setTimeout(()=>{

@@ -59,8 +59,8 @@ const Settings = () => {
 
   useEffect(() => {
     const userInfo =  JSON.parse(localStorage.getItem('userInfo'));
-  
-    User(userInfo._id)
+
+    User(userInfo.user._id)
   }, []);
 
 

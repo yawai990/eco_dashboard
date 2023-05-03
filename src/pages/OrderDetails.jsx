@@ -3,6 +3,7 @@ import { Button, Text } from '../components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import * as api from '../api';
 import { format } from 'date-fns';
+import { TiArrowBack } from 'react-icons/ti';
 import { Loading, ImageCom } from '../components';
 
 const OrderDetails = ({ toast }) => {
@@ -12,6 +13,7 @@ const OrderDetails = ({ toast }) => {
   const [ deliver, setDeliver ] = useState(false);
   const id = pathname.split('/').slice(-1)[0];
   const [ single_order, set_single_order ] = useState({});
+
 
   const getSingle = async( orderId) =>{
     setLoading(true)
@@ -43,6 +45,7 @@ const OrderDetails = ({ toast }) => {
           setDeliver(false);
           toast.success(message)
           getSingle(id)
+          history.back();
          }
        })
        .catch(err => console.log(err))
@@ -59,7 +62,16 @@ const OrderDetails = ({ toast }) => {
 
   return (
     <div>
+
+      <div className="w-[90%] flex justify-between">
       <Text title={'Order Details'} size={22} color={'stone-700'} />
+
+     <button 
+          onClick={() => history.back()}
+          className='bg-primary w-10 h-10 flex justify-center items-center text-4xl text-stone-100 rounded-full'>
+            <TiArrowBack />
+            </button>
+      </div>
       
       <div className='w-[90%] mt-5 p-5 flex justify-around'>
       <div>
@@ -69,9 +81,9 @@ const OrderDetails = ({ toast }) => {
       <Line header={'Total :'} detail={`$${single_order.orderQuantity * single_order.product.price}`} />
 
       <Line header={'Payment :'} detail={
-        single_order.payment === 0 ? 'Cash On Delivery':
+        single_order.payment === 0 ? 'Paypal':
         single_order.payment === 1 ? 'MPU':
-        single_order.payment === 2 ? 'Paypal': 'Mobile Banking'
+        single_order.payment === 2 ? 'Cash On Delivery': 'Mobile Banking'
         } />
 
     <Line header={'Order Date :'} detail={single_order.orderDate} />
@@ -96,10 +108,23 @@ const OrderDetails = ({ toast }) => {
     <div className="mt-5">
       <Text title={'Customer Details'} size={22} color={'stone-600'} />
 
-      <div className='w-[50%] p-5'>
+      <div className='w-[100%] p-5'>
 
-      <Line header={'Email :'} detail={single_order.user.email} />
-      <Line header={'Name :'} detail={single_order.user.name} />
+        <section className="w-[80%] flex justify-between items-start">
+            <div>
+            <Line header={'Email :'} detail={single_order.user.email} />
+            <Line header={'Name :'} detail={single_order.user.name} />
+            <Line header={'country :'} detail={single_order.user.country} />
+            </div>
+            <div>
+            <Line header={'Phone No :'} detail={single_order.user.phNumber} />
+            <Line header={'address :'} detail={single_order.user.address} />     
+            <Line header={'city :'} detail={single_order.user.city} />
+            </div>
+        </section>
+
+      
+     
       </div>
     </div>
     </div>
@@ -107,9 +132,9 @@ const OrderDetails = ({ toast }) => {
 };
 
 const Line = ({ header, detail}) => {
-  return <div className='mb-3 flex items-center justify-start gap-4'>
+  return <div className='mb-3 flex items-center justify-start gap-4 capitalize'>
   <Text title={header} size={16} />
-  <Text title={detail} />
+  <Text title={detail} nobold />
 </div>
 }
 

@@ -5,7 +5,7 @@ import Text from './Text';
 import Button from './Button';
 import { BsFillPencilFill,BsTrash } from 'react-icons/bs';
 
-const ProductCard = ({ productID,cardId,cardImg,cardStock, cardHeader,cardRating, cardPrice, cardDeleteFun }) => {
+const ProductCard = ({ cardDiscount,productID,cardId,cardImg,cardStock, cardHeader,cardRating, cardPrice, cardDeleteFun }) => {
 
   return (
     <div className='h-fit border border-stone-200 rounded-md overflow-hidden'>
@@ -26,7 +26,11 @@ const ProductCard = ({ productID,cardId,cardImg,cardStock, cardHeader,cardRating
         </div>
         </div>
         </div>
+        
+        <div className="flex justify-between items-center">
         <Text title={`$ ${cardPrice}`} />
+        <Text title={`${cardDiscount ? `${cardDiscount}% OFF`:''}`} color={'red-500'} size={12} />
+        </div>
         <ReactStars count={5} value={cardRating} edit={false} />
 
         <div className='flex justify-between items-center mt-2'>

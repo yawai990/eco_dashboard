@@ -29,11 +29,12 @@ const Overview = () => {
     })
     .catch(err => err)
   };
+
   const revenue_and_saleQty = async(year) =>{
     await api.totalSalesRevenue(year)
     .then(resp => {
      const { status,totalRevenue,totalSales,monthly_revenue } = resp.data;
-   
+  
      if(status){
       let r_data=[];
        //for the total revenue per month
@@ -52,6 +53,7 @@ const Overview = () => {
     .catch(err => console.log(err));
 
   };
+
  const getBestSellers = async () =>{
    await api.bestSellers()
    .then(resp =>{
@@ -66,7 +68,7 @@ const Overview = () => {
  };
 
  const handleOrderDetails = id =>{
-  navigate(`/order/${id}`)
+  navigate(`/products/${id}`)
  };
 
  const getYears = async () => {
@@ -82,7 +84,6 @@ const Overview = () => {
 
   useEffect(() =>{
     TotalOrder()
-    revenue_and_saleQty(selectedYear)
     getBestSellers()
     getYears();
   },[]);

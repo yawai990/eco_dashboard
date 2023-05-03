@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Layout';
-import { Overview, Orders, Products,ProductEdit, Setting, Employee,EmployeeDetail,OrderDetails,Category, Addnewemployee } from './pages';
+import { Overview, Orders, Products,ProductEdit, Promotion,Setting, Employee,EmployeeDetail,OrderDetails,Category, Addnewemployee } from './pages';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { toast } from 'react-toastify'
 
@@ -37,6 +37,10 @@ const App = () => {
         {
           path : '/products/:id',
           element : <ProductEdit />
+        },
+        {
+          path : '/products/promotion',
+          element : <Promotion />
         },
         {
           path : '/employees',

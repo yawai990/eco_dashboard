@@ -40,12 +40,14 @@ const ProductEdit = () => {
     const productBrand = elements.p_brand.value;
     const productPrice = elements.p_price.value;
     const productStock = elements.p_stock.value;
+    const discount = elements.p_discount.value;
 
     const updateData = { 
       productName,
-       productBrand, 
+      productBrand, 
       productPrice:Number(productPrice), 
-      productStock:Number(productStock) 
+      productStock:Number(productStock) ,
+      discount : Number(discount)
     };  
     //call the api 
     await api.updateSingleProduct(singleId,updateData)
@@ -100,11 +102,20 @@ const ProductEdit = () => {
 
         <div className="flex justify-between gap-1">
 
+        <main>
         <FormControl name={'p_price'} 
         labelName='Product price($)' 
         value={item.price} 
         type='number' 
         onChange={e => setItem({...item, price : e.target.value})} />
+   
+      <FormControl name={'p_discount'} 
+            labelName='Promotion(%)' 
+            value={(item.discount ? item.discount:'')} 
+            type='number' 
+            onChange={e => setItem({...item, discount : e.target.value})} />
+      
+           </main>
 
         <FormControl
          name={'p_stock'} 

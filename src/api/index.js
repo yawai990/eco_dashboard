@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://ecodashboard-backend.onrender.com/api'
-    //baseURL: 'http://localhost:5000/api'
+   // baseURL: 'https://ecodashboard-backend.onrender.com/api'
+    baseURL: 'http://localhost:5000/api'
 });
 
 API.interceptors.request.use(req => {
@@ -34,6 +34,9 @@ export const getCategory = () => API.get('/category/getallcategory');
 export const addCategory = (data) => API.post('/category/addcategory', data);
 export const deleteCategory = (id) => API.delete(`/category/deletecategory/${id}`);
 
+//brand
+export const getBrands = () => API.get('/products/getbrands');
+
 //order
 export const totalOrder = () => API.get('orders/totalorders');
 export const getOrders = (orderDate) => API.get(`orders/getallorders?orderdate=${orderDate}`);
@@ -51,3 +54,8 @@ export const updateEmployee = (id,data) => API.post(`employee/updateemployee/${i
 //notification 
 export const Notification = () => API.get('notification/getnotification');
 export const viewNotification = () => API.post('notification/updatenotification');
+
+
+// promotions
+export const CreatePromotion = (data) => API.post('/promotion/createpromotion',data);
+export const DeletePromotion = () => API.delete('/promotion/deletepromotion');

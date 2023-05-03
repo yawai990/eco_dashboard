@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Button, ProductCard, AddForm, Pagination, Loading } from '../components';
-import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as api from '../api';
@@ -13,6 +13,7 @@ const Products = () => {
   const [ totalPagi, setTotalPagi ] = useState(1);
   const [ isLoading, setIsLoading ] = useState(true);
   const [ categories, setCategories ] = useState([]);
+  const navigate =useNavigate();
 
   const ToastNoti = noti =>toast(noti);
 
@@ -44,7 +45,7 @@ const Products = () => {
     .catch(err => console.log(err))
   };
 
-  useEffect(() =>{getAllcategory()},[])
+  useEffect(() =>{getAllcategory()},[]);
   //call the getAllProducts fun when the user add new item
   useEffect(() =>{
     getAllProducts(currentPage)
@@ -62,6 +63,7 @@ const Products = () => {
   };
 
   const handleForm =() => setShowForm(!showForm);
+  const handlePromo = () => navigate('/products/promotion');
 
   if(isLoading){
     return <Loading />
@@ -85,8 +87,18 @@ const Products = () => {
 
     <Text title={'products'} textCase='capitalize' size={24} color={'text-head-gray'} />
 
-    <div className='bg-primary py-1 px-3 rounded-md shadow-sm text-white'>
-      <Button btnText={'add products'} btnfun={handleForm} />
+    <div className='flex items-center gap-1'>
+      {
+        [
+          { text : 'promotions', fun : handlePromo},
+          { text : 'add product', fun : handleForm}
+      ].map((b,idx)=>(
+        <div key={`btn-${idx}`} className='bg-primary py-1 px-3 rounded-md shadow-sm text-white'>
+        <Button btnText={b.text} btnfun={b.fun} />
+      </div>
+      ))
+      }
+
     </div>
 
     </div>
@@ -105,6 +117,7 @@ const Products = () => {
           cardDeleteFun = {deleteProduct}
           cardRating={product.rating}
           productID={product._id}
+          cardDiscount = {(product.discount && product.discount > 0) ? product.discount:''}
           /> ) 
       }
        

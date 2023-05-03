@@ -71,7 +71,7 @@ const Orders = () => {
 
       </div>
 
-      <div className='max-w-full overflow-x-scroll mt-4'>
+      <div className='max-w-full h-[80vh] overflow-x-scroll mt-4'>
         <Table colData={orderColName} rowData={data} clickFun={handleOrderDetails} border />
       </div>
       </main>

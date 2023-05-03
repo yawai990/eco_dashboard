@@ -25,7 +25,7 @@ const Pagination = ({ current, total, pagiFun }) => {
         btnfun={() => pagiFun(idx+1)}
         />)
       }
-      <Button  disabled={disabled.next} btnIcon={<IoIosArrowForward />} outline rectangle />
+      <Button disabled={disabled.next} btnIcon={<IoIosArrowForward />} outline rectangle />
     </div>
   )
 }

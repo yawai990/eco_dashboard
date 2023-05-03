@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Header = ({ title,capitalize, center, color, size, fs, ls, textCase }) => {
+const Header = ({ title,capitalize, center,nobold, color, size, fs, ls, textCase }) => {
   return (
     <h1 
     style={{
       fontSize:`${size}px`
     }}
-    className={`font-semibold
+    className={`${nobold ? 'font-light':'font-semibold'}
     ${center ? 'text-center':''}
     ${capitalize ? 'capitalize':''}
      text-${color ? color:'gray-400'} ${fs ? fs:'normal'} ${textCase ? textCase :'text-medium'} 

@@ -4,6 +4,7 @@ const InputLabel = ({ min,required,multiple,name,label,inputValue,px,py,bold,siz
   return (
     <div className='w-full md:min-w-[50%] mb-2'>
     <label htmlFor={name} className={`w-full ${!no_margin && 'mb-2'} block ${size ? `text-[${size}px]}`:'text-lg'} tracking-wider font-semibold capitalize`}>{label}</label>
+    
     <input name={name} id={name}
     multiple
      type={inputType} placeholder={placeholder}

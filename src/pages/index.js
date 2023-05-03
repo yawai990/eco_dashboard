@@ -9,3 +9,4 @@ export { default as ProductEdit } from './ProductEdit';
 export { default as OrderDetails } from './OrderDetails';
 export { default as Category } from './Category';
 export { default as Addnewemployee } from './Addnewemployee';
+export { default as Promotion } from './Promotion';

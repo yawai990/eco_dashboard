@@ -18,8 +18,7 @@ const Layout = () => {
   } 
   setIsLogin(false);
   navigate('/')
-  }, [])
-  // const { isLoading, isError, data, error } = useQuery('todos', api.loginUser)
+  }, []);
 
   if(!isLogin) {
     return <Login setIsLogin={setIsLogin} />

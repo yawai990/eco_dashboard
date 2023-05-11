@@ -45,6 +45,7 @@ const Products = () => {
     .catch(err => console.log(err))
   };
 
+  
   useEffect(() =>{getAllcategory()},[]);
   //call the getAllProducts fun when the user add new item
   useEffect(() =>{
@@ -113,6 +114,7 @@ const Products = () => {
           cardHeader={product.productName}
           cardStock={product.stock}
           cardPrice={product.price}
+          review={product.reviews}
           cardImg={product.image[0].path || '/profile.jpg'} 
           cardDeleteFun = {deleteProduct}
           cardRating={product.rating}

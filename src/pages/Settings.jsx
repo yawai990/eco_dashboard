@@ -69,7 +69,7 @@ const Settings = () => {
   }
   return (
     <section className="w-full flex justify-center items-start">
-    <main className='w-[95%] p-3 h-full bg-white drop-shadow mt-5'>
+    <main className='w-[95%] p-3 h-full bg-white drop-shadow mt-5 z-0'>
 
     <form onSubmit={handleUpdateUser}>
       <div className="flex gap-5">

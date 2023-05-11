@@ -34,22 +34,15 @@ const ProfileBar = () => {
     .catch(err => err)
   };
 
-
   const { isLoading, error, data } = useQuery([showNoti],() =>getNoti());
 
   return (
     <main className='flex justify-end mt-6'>
     <div className='flex items-center gap-4 text-white px-2 rounded py-1'>
-        
-        <div className='bg-white drop-shadow rounded-full p-1 relative'>
-          {
-            data?.length > 0 &&
-          <div className='w-2 h-2 bg-red-400 rounded-full absolute top-1 right-1'></div>
-          }
-          <Button btnfun={() =>setShowNoti(true)} btnIcon={<BsBell />} btnColor={'black'} size={18} rectangle />
-          {
+
+    {
             showNoti && 
-          <div className='min-w-[250px] absolute bg-white drop-shadow text-stone-700 top-12 -translate-x-1/2 px-3 py-2 rounded'>
+          <div className='min-w-[250px] absolute bg-white drop-shadow text-stone-700 top-20 -translate-x-1/2 px-3 py-2 rounded z-10'>
             <Fade top opposite>
             <div style={{
               rotate:'45deg'
@@ -72,7 +65,13 @@ const ProfileBar = () => {
             </Fade>
             </div>
           }
-
+        
+        <div className='bg-white drop-shadow rounded-full p-1 relative'>
+          {
+            data?.length > 0 &&
+          <div className='w-2 h-2 bg-red-400 rounded-full absolute top-1 right-1'></div>
+          }
+          <Button btnfun={() =>setShowNoti(true)} btnIcon={<BsBell />} btnColor={'black'} size={18} rectangle />
         </div>
 
         <div className='max-w-[140px] px-3 py-1 flex gap-1 items-center bg-primary rounded'>

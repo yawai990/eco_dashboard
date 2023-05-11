@@ -7,6 +7,13 @@ import { BsFillPencilFill,BsTrash } from 'react-icons/bs';
 
 const ProductCard = ({ cardDiscount,productID,cardId,cardImg,cardStock, cardHeader,cardRating, cardPrice, cardDeleteFun }) => {
 
+  //for rating calculation
+  // const ra = [ {rating : 3},{rating : 5},{rating : 4}];
+
+  // const average = ra.reduce((val,cuu) =>{
+  //   const rating = (val + cuu.rating) / ra.length;
+  //   return rating;
+  // }, 0)
   return (
     <div className='h-fit border border-stone-200 rounded-md overflow-hidden'>
 

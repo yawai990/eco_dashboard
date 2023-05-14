@@ -6,6 +6,7 @@ import * as api from '../api';
 import moment from 'moment/moment';
 import { TiTimes } from 'react-icons/ti';
 import Fade from 'react-reveal/Fade';
+import Clock from './Clock/Clock';
 
 const ProfileBar = () => {
   const [ showNoti, setShowNoti ] = useState(false);
@@ -38,7 +39,7 @@ const ProfileBar = () => {
 
   return (
     <main className='flex justify-end mt-6'>
-    <div className='flex items-center gap-4 text-white px-2 rounded py-1'>
+    <div className='w-full flex items-center justify-between gap-4 text-white px-2 rounded py-1'>
 
     {
             showNoti && 
@@ -65,7 +66,9 @@ const ProfileBar = () => {
             </Fade>
             </div>
           }
-        
+          <Clock />
+
+          <section className='flex items-center gap-6'>
         <div className='bg-white drop-shadow rounded-full p-1 relative'>
           {
             data?.length > 0 &&
@@ -80,6 +83,7 @@ const ProfileBar = () => {
             </div>
                 <p>{userInfo.name}</p>
         </div>
+        </section>
     </div>
     </main>
   )

@@ -12,6 +12,8 @@ const Overview = () => {
   const [ t_order, setT_order] = useState(0);
   const [ total_sales, set_total_sales ] = useState(0);
   const [ total_revenue, set_total_revenue ] = useState(0);
+  const [ yearlyExpense, setYearlyExpense ] = useState(0);
+  const [ yearlyRevenue, setYearlyRevenue ] = useState(0);
   const [ incomeData, setIncomeData ] = useState([]);
   const [ bestSeller, setBestSeller ] = useState([]);
   const [ budgetYears , setBudgetYears ] = useState([]);
@@ -33,7 +35,7 @@ const Overview = () => {
   const revenue_and_saleQty = async(year) =>{
     await api.totalSalesRevenue(year)
     .then(resp => {
-     const { status,totalRevenue,totalSales,monthly_revenue } = resp.data;
+     const { status,totalRevenue,totalSales,yearlyRevenue,monthly_revenue } = resp.data;
   
      if(status){
       let r_data=[];
@@ -46,6 +48,7 @@ const Overview = () => {
      r_data.push({name : Object.keys(monthly_revenue)[i], income : revenue_by_month});
      };
       set_total_sales(totalSales)
+      setYearlyRevenue(yearlyRevenue)
       set_total_revenue(totalRevenue)
       setIncomeData(r_data)
      }
@@ -88,9 +91,37 @@ const Overview = () => {
     getYears();
   },[]);
 
-  useEffect(() => {
-    revenue_and_saleQty(selectedYear)
-  }, [ selectedYear ]);
+  const getExpense =async () => {
+    await api.Expense()
+    .then(resp =>{
+    const { status, TotalExpense, yearlyExpense, monthly_expense } = resp.data;
+    if(status){
+      let r_data=[];
+       //for the total revenue per month
+     for (let i = 0; i < Object.keys(monthly_expense).length; i++) {
+      const expense_by_month = monthly_expense[Object.keys(monthly_expense)[i]].reduce((acc,cur)=>{
+        let t = cur.amount
+        return t + acc
+      },0);
+    
+      r_data.push({name : Object.keys(monthly_expense)[i], expense : expense_by_month});
+     };
+      // set_total_sales(totalSales)
+      setYearlyExpense(yearlyExpense)
+      setIncomeData(r_data)
+     }
+    })
+    };
+
+
+  useEffect(() =>{
+    if(chartTitle === 'expense'){
+      getExpense()
+    }else{
+      revenue_and_saleQty(selectedYear)
+    }
+  }, [ chartTitle,selectedYear ])
+
 
   return (
     <section className="w-full flex justify-center items-start">
@@ -112,7 +143,7 @@ const Overview = () => {
 
         <div className='w-full flex justify-between items-center'>
 
-          <div className='flex gap-3'>
+          <div className='flex gap-3 items-center'>
             {
               ['income','expense'].map((btn, ind) => (
                 <button key={`chartBtn-${ind}`} 
@@ -122,6 +153,8 @@ const Overview = () => {
                   </button>
               ))
             }
+
+          <span className='capitalize'>{chartTitle} For Current Year : $ <strong>{chartTitle === 'income' ? yearlyRevenue:yearlyExpense}</strong> </span>
           </div>
           <select name="year" id="" 
           onChange={e => setSelectedYear(e.target.value)}
@@ -135,7 +168,12 @@ const Overview = () => {
         </div>
 
         <div className="mt-5 capitalize">
-        <Chart chartTitle={chartTitle} data={incomeData} />
+          {
+            chartTitle === 'income' ? 
+            <Chart chartTitle={'income'} data={incomeData} />
+            :
+            <Chart chartTitle={'expense'} data={incomeData} />
+          }
         </div>
       </div>
 

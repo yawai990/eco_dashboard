@@ -5,15 +5,8 @@ import Text from './Text';
 import Button from './Button';
 import { BsFillPencilFill,BsTrash } from 'react-icons/bs';
 
-const ProductCard = ({ cardDiscount,productID,cardId,cardImg,cardStock, cardHeader,cardRating, cardPrice, cardDeleteFun }) => {
+const ProductCard = ({ cardDiscount,productID,cardId,cardImg,cardStock, review,cardHeader,cardRating, cardPrice, cardDeleteFun }) => {
 
-  //for rating calculation
-  // const ra = [ {rating : 3},{rating : 5},{rating : 4}];
-
-  // const average = ra.reduce((val,cuu) =>{
-  //   const rating = (val + cuu.rating) / ra.length;
-  //   return rating;
-  // }, 0)
   return (
     <div className='h-fit border border-stone-200 rounded-md overflow-hidden'>
 
@@ -38,7 +31,16 @@ const ProductCard = ({ cardDiscount,productID,cardId,cardImg,cardStock, cardHead
         <Text title={`$ ${cardPrice}`} />
         <Text title={`${cardDiscount ? `${cardDiscount}% OFF`:''}`} color={'red-500'} size={12} />
         </div>
+
+        <div className="flex items-center justify-start">
         <ReactStars count={5} value={cardRating} edit={false} />
+       {
+        review.length > 0 && <span className='text-xs'>
+          ( {review.length} )
+          </span>
+       }
+        </div>
+     
 
         <div className='flex justify-between items-center mt-2'>
           <Link to={`/products/${productID}`}>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { ResponsiveContainer, BarChart, XAxis,CartesianGrid, YAxis,Tooltip, Bar } from 'recharts';
-import { incomeChartData, expenseChartData } from './data/ChartData';
+import { expenseChartData } from './data/ChartData';
 
 const Chart = ({ chartTitle,data }) => {
   return (
       <ResponsiveContainer width='100%' height='100%' minHeight={360}>
-      <BarChart width={730} height={250} data={chartTitle === 'income' ? data:expenseChartData}>
+      <BarChart width={730} height={250} data={chartTitle === 'income' ? data:data}>
       <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey='name' />
         <YAxis />

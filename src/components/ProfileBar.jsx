@@ -43,7 +43,7 @@ const ProfileBar = () => {
 
     {
             showNoti && 
-          <div className='min-w-[250px] absolute bg-white drop-shadow text-stone-700 top-20 -translate-x-1/2 px-3 py-2 rounded z-10'>
+          <div className='min-w-[250px] absolute bg-white drop-shadow text-stone-700 top-20 -right-28 -translate-x-1/2 px-3 py-2 rounded z-10'>
             <Fade top opposite>
             <div style={{
               rotate:'45deg'

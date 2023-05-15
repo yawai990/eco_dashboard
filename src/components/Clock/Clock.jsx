@@ -1,4 +1,5 @@
-import React,{ useState,useEffect } from 'react'
+import React,{ useState,useEffect } from 'react';
+import moment from 'moment';
 
 const Clock = () => {
      const [ clock, setClock ] = useState({ hour : 0, minute :0, second : 0, ampm:'AM'});
@@ -21,10 +22,15 @@ const Clock = () => {
      }, [date]);
 
   return (
-     <div className='text-primary text-2xl uppercase font-semibold'>
+     <main className='text-stone-800 flex items-center gap-2'>
+     <div>
+          {moment(new Date()).format("DD-MM-yy (dddd)")}
+     </div>
+     <div className='text-2xl uppercase font-semibold'>
           <span>{clock.hour}:{clock.minute}:{clock.second}
           <span> {clock.ampm}</span>
           </span></div>
+     </main>
   )
 }
 

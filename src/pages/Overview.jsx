@@ -37,7 +37,6 @@ const Overview = () => {
     await api.totalSalesRevenue(year)
     .then(resp => {
      const { status,totalRevenue,totalSales,yearlyRevenue,monthly_revenue } = resp.data;
-     console.log(resp.data)
      if(status){
       let r_data=[];
        //for the total revenue per month
@@ -159,7 +158,7 @@ const Overview = () => {
           </div>
           <select name="year" id="" 
           onChange={e => setSelectedYear(e.target.value)}
-          className='border p-1 outline-none rounded-md border-head-gray font-semibold text-head-gray'>
+          className='border p-1 cursor-pointer outline-none rounded-md border-head-gray font-semibold text-head-gray'>
            {
             budgetYears?.map((y,idx)=>(
               <option key={`${y}-${idx}`} value={y}>{y}</option>

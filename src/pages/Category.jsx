@@ -4,6 +4,7 @@ import * as api from '../api';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { Loading,InputLabel, Button, Text } from '../components';
 import { toast } from 'react-toastify';
+import RadioCom from '../components/RadioCom';
 
 const Category = () => {
     const [ currentMode, setCurrentMode ] = useState('list');
@@ -89,8 +90,8 @@ const Category = () => {
 
         <div className='mb-4 flex gap-4'>
 
-            <RadioCom label={'list'} fun={setMode} currentMode={currentMode} />
-            <RadioCom label={'new category'} fun={setMode} currentMode={currentMode} />
+            <RadioCom label={'list'} name={'category'} fun={setMode} currentMode={currentMode} />
+            <RadioCom label={'new category'} name={'category'} fun={setMode} currentMode={currentMode} />
 
         </div>
 
@@ -173,12 +174,5 @@ const Category = () => {
     </div>
   )
 };
-
-const RadioCom = ({ label, fun,currentMode }) =>{
-    return <div className='flex gap-2'>
-    <input type="radio" name='category' id={label} value={label} onChange={fun} checked={currentMode === label ? true:false} />
-    <label htmlFor={label} className='capitalize'>{label}</label>
-    </div>
-}
 
 export default Category

@@ -10,3 +10,7 @@ export { default as OrderDetails } from './OrderDetails';
 export { default as Category } from './Category';
 export { default as Addnewemployee } from './Addnewemployee';
 export { default as Promotion } from './Promotion';
+export { default as Expense } from './expenses/Expense';
+export { default as AddExpenseForm } from './expenses/AddExpenses';
+export { default as ExpenseStatement } from './expenses/Statement';
+export { default as ExpenseEditDelete } from './expenses/EditDelete';

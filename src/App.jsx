@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Layout';
-import { Overview, Orders, Products,ProductEdit, Promotion,Setting, Employee,EmployeeDetail,OrderDetails,Category, Addnewemployee } from './pages';
+import { Overview, Orders, Products,ProductEdit,ExpenseStatement, AddExpenseForm, ExpenseEditDelete, Promotion,Setting, Expense, Employee,EmployeeDetail,OrderDetails,Category, Addnewemployee } from './pages';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { toast } from 'react-toastify'
 
@@ -57,6 +57,22 @@ const App = () => {
         {
           path : '/order/:id',
           element : <OrderDetails toast={toast} />
+        },
+        {
+          path : '/expense',
+          element : <Expense />
+        },
+        {
+          path : '/expense/expenses',
+          element : <AddExpenseForm />
+        },
+        {
+          path : '/expense/statement',
+          element : <ExpenseStatement />
+        },
+        {
+          path : '/expense/editdelete',
+          element : <ExpenseEditDelete />
         },
         {
           path : '/settings',

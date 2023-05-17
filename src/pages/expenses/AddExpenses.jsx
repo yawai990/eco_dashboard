@@ -4,14 +4,17 @@ import { BsThreeDots } from 'react-icons/bs';
 import format from 'date-fns/format';
 import * as api from '../../api';
 import { Fade } from 'react-reveal';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const currency = [
-  {_id:1,name:"US$"},
-  {_id:2,name:"MMK"},
-  {_id:3,name:"Yen"}
+  {_id:"USD",name:"USD"},
+  {_id:"MMK",name:"MMK"},
+  {_id:"THB",name:"THB"}
 ];
 
 const AddExpenses = () => {
+  const navigate = useNavigate();
   const [ showCalendar, setShowCalendar ] = useState(false);
   const [ datevalue, setdateValue ] = useState(null);
   const [ employees, setEmployees ]  = useState([]);
@@ -64,7 +67,16 @@ const AddExpenses = () => {
   const insertDataDelete = (id) =>setInsertData(insertData.filter(d => d.id !== id));
 
   const SaveToDB = async() =>{
-    console.log('api will be here with the insertData value')
+  await api.InsertExpense(insertData)
+  .then(resp => {
+    const { status, message } = resp.data;
+    if(status){
+      setInsertData([]);
+      toast(message)
+      navigate('/expense');
+    }
+  })
+  .catch(err => console.log(err));
   }
 
   if(loading){
@@ -100,8 +112,9 @@ const AddExpenses = () => {
         {
           insertData.length > 0 &&
       
-          <div className='w-[95%] mx-auto mt-3'>
+          <div  className='w-[95%] mx-auto mt-5'>
 
+            <div id='table' className='max-h-[190px] h-auto overflow-y-scroll'>
             <table className='w-full rounded bg-white overflow-hidden'>
               <thead>
               <tr className='w-full bg-zinc-400 text-white uppercase h-[40px]'>
@@ -134,6 +147,7 @@ const AddExpenses = () => {
               }
               </tbody>
             </table>
+            </div>
 
             <button onClick={SaveToDB} className='p-1 bg-blue-500 hover:bg-blue-600 duration-100 hover:drop-shadow-xl rounded text-stone-200 mt-4 block'>save</button>
           </div>
@@ -149,7 +163,6 @@ const SelectControl = ({name, arr}) =>{
     <span>:</span>
   </label>
   <select name={name} id={name} className='min-w-[320px] capitalize outline-none border border-zinc-400 bg-transparent py-0.3 px-2 rounded'>
-
     {
       arr?.map(em =>(
         <option value={em._id || em.name} key={em._id || em.name}>{em.name}</option>

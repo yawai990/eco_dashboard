@@ -7,7 +7,7 @@ const Expense = () => {
     <div className="w-full mt-5 rounded overflow-hidden bg-white">
 
     {
-      ['expenses','editdelete','statement'].map((l,i) => <div className='w-[230px] h-[35px] flex items-center'>
+      ['expenses','editdelete','statement'].map((l,i) => <div className='w-[230px] h-[35px] flex items-center' key={`${l}-${i}`}>
       <div>
         <MdPlayArrow />
       </div>

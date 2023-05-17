@@ -61,4 +61,6 @@ export const CreatePromotion = (data) => API.post('/promotion/createpromotion',d
 export const DeletePromotion = () => API.delete('/promotion/deletepromotion');
 
 //expense
-export const Expense = () => API.get('/expense');
+export const Expense = (year) => API.get(`/expense?year=${year || new Date().getFullYear()}`);
+export const InsertExpense = (data) => API.post('/expense/newexpense', data);
+export const DeleteExpense = (id) => API.post(`/expense/deleteexpense/${id}`);

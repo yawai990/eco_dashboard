@@ -7,6 +7,24 @@
         background-color: #FB2576 !important;
         color: white;
     }
+    #table::-webkit-scrollbar{
+        width:3px;
+    }
+    /* Track */
+    #table::-webkit-scrollbar-track {
+    background: #797979;
+  }
+  
+  /* Handle */
+  #table::-webkit-scrollbar-thumb {
+    background: #e67070;
+  }
+  
+  /* Handle on hover */
+  #table::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  };
+
     input[type=number], input[type=radio], input[type=checkbox]{
         -webkit-appearance: none;
     }
@@ -16,8 +34,8 @@
     margin: 0;
     }
 
-}
-.react-date-picker__wrapper{
-    border-radius: 5px;
-    padding: 3px 0;
-}
+    }
+    .react-date-picker__wrapper{
+        border-radius: 5px;
+        padding: 3px 0;
+    }

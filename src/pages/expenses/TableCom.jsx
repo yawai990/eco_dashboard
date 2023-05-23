@@ -15,6 +15,7 @@ const TableCom = ({ expenseData }) => {
             <th className='w-[45px] py-2.5'>#</th>
             <th className='w-[220px]'>Name</th>
             <th className='w-[300px]'>Description</th>
+            <th className='w-[180px]'>Date</th>
             <th className='w-[120px]'>Amount</th>
             <th className='w-[220px]'>Currency</th>
             <th>&nbsp;</th>
@@ -24,10 +25,11 @@ const TableCom = ({ expenseData }) => {
         <tbody className='capitalize'>
           {
             expenseData.map((ed,idx) =>(  
-        <tr className='text-center border-b border-stone-100' key={ed._id}>
+        <tr className='text-center border-b border-stone-100 hover:bg-stone-100 duration-200 cursor-pointer' onClick={() => handleEdit(ed._id)} key={ed._id}>
             <td className='py-2'>{idx+1}</td>
             <td>{ed.usedBy.name}</td>
             <td>{ed.title}</td>
+            <td>{ed.date}</td>
             <td>{ed.expense.amount}</td>
             <td>{ed.expense.currency}</td>
             <td>

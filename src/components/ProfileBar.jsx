@@ -38,7 +38,7 @@ const ProfileBar = () => {
   const { isLoading, error, data } = useQuery([showNoti],() =>getNoti());
 
   return (
-    <main className='flex justify-end mt-6'>
+    <main className='flex justify-end mt-6 bg-white drop-shadow rounded sticky top-0'>
     <div className='w-full flex items-center justify-between gap-4 text-white px-2 rounded py-1'>
 
     {
@@ -77,7 +77,7 @@ const ProfileBar = () => {
           <Button btnfun={() =>setShowNoti(true)} btnIcon={<BsBell />} btnColor={'black'} size={18} rectangle />
         </div>
 
-        <div className='max-w-[140px] px-3 py-1 flex gap-1 items-center bg-primary rounded'>
+        <div className='max-w-[140px] px-3 py-1 flex gap-1 items-center rounded text-stone-800'>
             <div className="w-8 h-8 rounded overflow-hidden">
                 <img src='/profile.jpg' className='w-full h-full object-cover' />
             </div>

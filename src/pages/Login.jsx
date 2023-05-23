@@ -38,8 +38,7 @@ const Login = ({setIsLogin}) => {
     })
     .catch(err => {
       const { success, message} = err.response.data;
-
-      if(!success){
+            if(!success){
         toast.error(message)
       }
     })

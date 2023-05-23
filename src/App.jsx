@@ -1,8 +1,8 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Layout';
-import { Overview, Orders, Products,ProductEdit,ExpenseStatement, AddExpenseForm, ExpenseEditDelete, Promotion,Setting, Expense, Employee,EmployeeDetail,OrderDetails,Category, Addnewemployee } from './pages';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import { Overview, Orders, Products,ProductEdit,ExpenseStatement, ExpenseEditForm,AddExpenseForm, ExpenseEditDelete, Promotion,Setting, Expense, Employee,EmployeeDetail,OrderDetails,Category, Addnewemployee } from './pages';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { toast } from 'react-toastify'
 
 const queryClient = new QueryClient()
@@ -69,6 +69,10 @@ const App = () => {
         {
           path : '/expense/statement',
           element : <ExpenseStatement />
+        },
+        {
+          path : '/expense/editdelete/editform/:id',
+          element : <ExpenseEditForm />
         },
         {
           path : '/expense/editdelete',

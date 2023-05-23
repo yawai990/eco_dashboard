@@ -28,9 +28,11 @@ const Layout = () => {
         <Sidebar />
         <ToastContainer pauseOnHover={false} />
 
-        <div className='w-[80%] px-4'>
+        <div className='w-[80%]'>
         <ProfileBar />  
+        <div className="w-full px-4">
         <Outlet />
+        </div>
         </div>
     </main>
   )

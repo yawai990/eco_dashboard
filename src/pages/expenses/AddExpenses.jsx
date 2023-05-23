@@ -194,7 +194,7 @@ const DateControl =({ datevalue,setdateValue, showCalendar,setShowCalendar }) =>
     className='min-w-[320px] outline-none border border-zinc-400 bg-transparent py-0.3 px-2 rounded' />
 
   <div className='bg-indigo-300 relative inline-flex justify-center items-center'>
-  <input type="checkbox" className='absolute w-full h-full cursor-pointer' onChange={() => setShowCalendar(!showCalendar)} />
+  <input type="checkbox" className='absolute opacity-0 w-full h-full cursor-pointer' onChange={() => setShowCalendar(!showCalendar)} />
   <BsThreeDots className='text-2xl text-white' />
   { showCalendar && 
   <div className='absolute top-7 right-0 z-10'>

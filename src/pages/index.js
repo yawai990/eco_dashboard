@@ -14,3 +14,4 @@ export { default as Expense } from './expenses/Expense';
 export { default as AddExpenseForm } from './expenses/AddExpenses';
 export { default as ExpenseStatement } from './expenses/Statement';
 export { default as ExpenseEditDelete } from './expenses/EditDelete';
+export { default as ExpenseEditForm } from './expenses/EditForm';

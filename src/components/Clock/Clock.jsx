@@ -22,11 +22,11 @@ const Clock = () => {
      }, [date]);
 
   return (
-     <main className='text-stone-800 flex items-center gap-2'>
+     <main className='text-stone-600 flex items-center gap-2'>
      <div>
           {moment(new Date()).format("DD-MM-yy (dddd)")}
      </div>
-     <div className='text-2xl uppercase font-semibold'>
+     <div className='text-xl uppercase'>
           <span>{clock.hour}:{clock.minute}:{clock.second}
           <span> {clock.ampm}</span>
           </span></div>

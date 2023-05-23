@@ -62,5 +62,8 @@ export const DeletePromotion = () => API.delete('/promotion/deletepromotion');
 
 //expense
 export const Expense = (year) => API.get(`/expense?year=${year || new Date().getFullYear()}`);
+export const SingleExpense =(id) => API.get(`/expense/expensedata/${id}`);
+export const UpdateExpense = (id) => API.put(`/expense/editexpense/${id}`);
+export const FilterDate = (month,year) => API.get(`/expense/filterdate?month=${month}&year=${year}`)
 export const InsertExpense = (data) => API.post('/expense/newexpense', data);
 export const DeleteExpense = (id) => API.post(`/expense/deleteexpense/${id}`);

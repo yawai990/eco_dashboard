@@ -8,7 +8,7 @@ import { BsFillPencilFill,BsTrash } from 'react-icons/bs';
 const ProductCard = ({ cardDiscount,productID,cardId,cardImg,cardStock, review,cardHeader,cardRating, cardPrice, cardDeleteFun }) => {
 
   return (
-    <div className='h-fit border border-stone-200 rounded-md overflow-hidden'>
+    <div className='h-fit border border-stone-200 rounded-md overflow-hidden dark:bg-stone-400 dark:text-white'>
 
           <div className='w-full h-[70%]'>
         <img src={`https://res.cloudinary.com/dtcws1ecu/image/upload/v1675503460/${cardImg}`} alt="" className='w-full h-[220px] object-cover' />

@@ -12,7 +12,8 @@ const NavLink = ({ text,title, size, nomb,py_0, nohover }) => {
   } 
     ${!nohover && `hover:border-red-500 hover:border-r-4` }
     hover:text-primary 
-      flex gap-5 items-center ${size ? size:'text-xl'} capitalize`
+      flex gap-5 items-center ${size ? size:'text-xl'} capitalize dark:text-white` 
+      
      }>
         <span>{title || text}</span>
       </li>

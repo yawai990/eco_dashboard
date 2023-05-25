@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 const Layout = () => {
   const [ isLogin, setIsLogin ] = useState(false);
   const navigate = useNavigate();
+  const [ darkTheme, setDarkTheme ] = useState(false);
 
 
   useEffect(() =>{
@@ -24,17 +25,22 @@ const Layout = () => {
     return <Login setIsLogin={setIsLogin} />
   }
   return (
-    <main className='max-w-screen min-h-screen flex overflow-x-hidden'>
+    <section className={`${darkTheme ? 'dark':''}`}>
+
+    <main className={`max-w-screen min-h-screen flex overflow-x-hidden dark:bg-neutral-700 duration-500`}>
+
         <Sidebar />
         <ToastContainer pauseOnHover={false} />
 
         <div className='w-[80%]'>
-        <ProfileBar />  
+        <ProfileBar theme={darkTheme} setDarkTheme={setDarkTheme} />  
         <div className="w-full px-4">
         <Outlet />
         </div>
         </div>
+
     </main>
+    </section>
   )
 }
 

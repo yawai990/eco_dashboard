@@ -139,7 +139,7 @@ const Overview = () => {
 
       </div>
 
-      <div className="w-full mt-6 bg-white border border-stone-300 p-3 rounded">
+      <div className="w-full mt-6 bg-white border border-stone-300 p-3 rounded dark:bg-stone-700 dark:text-white">
 
         <div className='w-full flex justify-between items-center'>
 
@@ -148,7 +148,7 @@ const Overview = () => {
               ['income','expense'].map((btn, ind) => (
                 <button key={`chartBtn-${ind}`} 
                 onClick={() => setChartTitle(btn)}
-                className={`text-xl capitalize text-head-gray ${chartTitle === btn ? 'font-semibold':'font-normal'}`}>
+                className={`text-xl capitalize text-head-gray dark:text-white ${chartTitle === btn ? 'font-semibold':'font-normal'}`}>
                   {btn}
                   </button>
               ))
@@ -167,7 +167,7 @@ const Overview = () => {
           </select>
         </div>
 
-        <div className="mt-5 capitalize">
+        <div className="mt-5 capitalize dark:text-white">
           {
             chartTitle === 'income' ? 
             <Chart chartTitle={'income'} data={incomeData} />
@@ -177,7 +177,7 @@ const Overview = () => {
         </div>
       </div>
 
-      <div className="w-full mt-6 bg-white border border-stone-300 p-3 rounded">
+      <div className="w-full mt-6 bg-white dark:bg-stone-500 dark:text-white border border-stone-300 p-3 rounded">
       <Text title={'Best Seller Products'} textCase='capitalize' size={22} color={'text-head-gray'} />
 
       <div className='mt-3'>

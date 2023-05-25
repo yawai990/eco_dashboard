@@ -86,9 +86,9 @@ const Category = () => {
    if(isLoading) return <Loading />
   
   return (
-    <div className="w-full mt-5 rounded overflow-hidden bg-white">
+    <div className="w-full mt-5 rounded overflow-hidden bg-white dark:bg-stone-500">
 
-        <div className='mb-4 flex gap-4'>
+        <div className='mb-4 flex gap-4 dark:text-white'>
 
             <RadioCom label={'list'} name={'category'} fun={setMode} currentMode={currentMode} />
             <RadioCom label={'new category'} name={'category'} fun={setMode} currentMode={currentMode} />
@@ -104,17 +104,17 @@ const Category = () => {
                 <div></div>
         </div>
 
-        <section className='bg-slate-100'>
+        <section className='bg-slate-100 dark:bg-transparent dark:text-white'>
            {
                data.length > 0 ? data?.map(d => (
-                <div className='grid grid-cols-4 text-center py-3 border-b border-stone-200 capitalize tracking-wider' key={d._id}>   
+                <div className='grid grid-cols-4 text-center py-3 border-b border-stone-200 capitalize tracking-wider hover:dark:bg-zinc-700' key={d._id}>   
                        <div>{d.category}</div>                 
                        <div>{products.filter(p => p.category === d.category ? p:null).length}</div>                 
-                       <div>${
+                       <div>${Intl.NumberFormat('en-US').format(
                         products.filter(p => p.category === d.category ? p:null).reduce((acc,curVal) =>{
                             return acc + (curVal.price * curVal.sales)
                           },0)
-                        }</div>        
+                        )}</div>        
                        <div>
                        <button onClick={() => handleDeleteCategory(d._id)}>
                           <AiFillCloseCircle className='text-primary text-3xl' />
@@ -128,7 +128,7 @@ const Category = () => {
         </section>
         </>:
          currentMode === 'new category' && <main className='flex gap-3'>
-                <form onSubmit={handleSubmit} className='min-w-[400px]'>
+                <form onSubmit={handleSubmit} className='min-w-[400px] px-4 dark:text-white'>
                         <InputLabel 
                         label={'New category'} 
                         placeholder="new category" 
@@ -146,7 +146,7 @@ const Category = () => {
                     <section>   
                             <Text title={'New Categories List'} size={18} />
 
-                            <main className='min-w-[280px] bg-slate-100 mt-2 rounded mb-3'>
+                            <main className='min-w-[280px] bg-slate-100 dark:bg-stone-400 mt-2 rounded mb-3'>
                                 <div className='py-1 text-center'>
                                 <Text title={'Category Name'} />
                                 </div>

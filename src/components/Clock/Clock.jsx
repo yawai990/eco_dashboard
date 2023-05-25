@@ -22,7 +22,7 @@ const Clock = () => {
      }, [date]);
 
   return (
-     <main className='text-stone-600 flex items-center gap-2'>
+     <main className='text-stone-600 flex items-center gap-2 dark:text-white'>
      <div>
           {moment(new Date()).format("DD-MM-yy (dddd)")}
      </div>

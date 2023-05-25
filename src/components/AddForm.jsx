@@ -61,7 +61,7 @@ const AddForm = ({ handleForm, ToastNoti, categories, setProductAdd }) => {
           <Text title='what will be your new products?' size={25} center textCase='capitalize' color='white' />
 
       <form onSubmit={handleSubmit}
-      className='w-[70%] xs:w-[90%] md:w-[40%] mx-auto border border-stone-300 bg-white rounded mt-5 p-3'>
+      className='w-[70%] xs:w-[90%] md:w-[40%] mx-auto border border-stone-300 bg-white dark:bg-stone-500 dark:text-white rounded mt-5 p-3'>
                <div className='h-[5%] px-3 text-[36px] flex justify-end items-center'>
           <Button btnText={<TiTimes />} btnColor={'white'} btnBg={'#FB2576'} rectangle size={17} rounded shadow btnfun={handleForm} />
           </div>

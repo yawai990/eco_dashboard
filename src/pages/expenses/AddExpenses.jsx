@@ -83,7 +83,7 @@ const AddExpenses = () => {
     return <h1>Loading...</h1>
   };
   return (
-    <main className='w-[90%] py-3 mt-3 mx-auto border border-stone-300 rounded bg-indigo-100'>
+    <main className='w-[90%] py-3 mt-3 mx-auto border border-stone-300 rounded bg-indigo-100 dark:bg-stone-500 dark:text-white'>
       <h1 className='text-center text-lg font-semibold tracking-wider underline'>Expense Advanced Settlement</h1>
 
     <form onSubmit={handleExpenseSubmit}>
@@ -106,7 +106,7 @@ const AddExpenses = () => {
       </section>
       { error && <p className='w-[95%] mx-auto text-xs text-primary'>** Please Fill All Fields ** </p>}
 
-         <button className='w-[320px] mx-auto block mt-5 rounded hover:bg-primary hover:text-white duration-200 border border-primary'>Add</button>
+         <button className='w-[320px] mx-auto block mt-5 rounded hover:bg-primary hover:text-white duration-200 border border-primary dark:border-white'>Add</button>
          </form>
 
         {

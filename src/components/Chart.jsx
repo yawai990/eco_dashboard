@@ -1,6 +1,5 @@
 import React from 'react';
 import { ResponsiveContainer, BarChart, XAxis,CartesianGrid, YAxis,Tooltip, Bar } from 'recharts';
-import { expenseChartData } from './data/ChartData';
 
 const Chart = ({ chartTitle,data }) => {
   return (

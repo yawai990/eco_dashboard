@@ -18,7 +18,8 @@ const Button = ({ disabled, btnType, btnIcon,rectangle,size,borderBottom,bold, b
    ${borderBottom && 'border-b-2 border-blue-400'}
    ${(outline && !disabled)  && `border border-stone-200 hover:bg-[#FB2576] hover:text-white`} 
    capitalize
-    ${rounded ? 'rounded-full':'rounded-md'} ${shadow & 'drop-shadow'}`}
+    ${rounded ? 'rounded-full':'rounded-md'} ${shadow & 'drop-shadow'}
+    `}
   >
     {btnIcon}
     {btnText}

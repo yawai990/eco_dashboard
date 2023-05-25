@@ -91,7 +91,7 @@ const Addnewemployee = () => {
   return (
     <section className="w-full p-3 flex justify-center items-start">
 
-    <main className='w-[95%] p-3 h-full'>
+    <main className='w-[95%] p-3 h-full dark:text-white dark:bg-stone-500 rounded overflow-hidden'>
       <div className='mt-3 flex justify-between'>
 
         <div className='flex items-center gap-3'>
@@ -106,7 +106,7 @@ const Addnewemployee = () => {
         </button>
     </div>
 
-    <form className='mt-3 bg-[#fff] p-4 drop-shadow rounded' onSubmit={handleSubmit}>
+    <form className='mt-3 bg-[#fff] p-4 drop-shadow rounded dark:bg-stone-500' onSubmit={handleSubmit}>
 
       <div className='flex gap-2'>
 

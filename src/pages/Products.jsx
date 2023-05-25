@@ -71,7 +71,7 @@ const Products = () => {
   }
   
   return (
-    <section className="w-full min-h-[60vh p-3 flex justify-center items-start">
+    <section className="w-full min-h-[60vh] p-3 flex justify-center items-start">
 
         <div>
             <ToastContainer />
@@ -84,7 +84,7 @@ const Products = () => {
 
     <div>
 
-    <div className='mt-3 flex justify-between itemss-center'>
+    <div className='mt-3 flex justify-between items-center'>
 
     <Text title={'products'} textCase='capitalize' size={24} color={'text-head-gray'} />
 
@@ -106,7 +106,7 @@ const Products = () => {
 
     <main className='mt-6'>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-cols-min gap-3 p-2 bg-white border border-stone-100 drop-shadow-sm'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-cols-min gap-3 p-2 bg-white border border-stone-100 drop-shadow-sm dark:bg-stone-500'>
       {
         !(isLoading && isError) && products?.map(product => <ProductCard 
           key={product._id}

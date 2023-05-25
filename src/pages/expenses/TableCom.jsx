@@ -10,7 +10,7 @@ const TableCom = ({ expenseData }) => {
   return (
     <div className='mt-5'>
       <table className='w-full bg-white drop-shadow rounded overflow-hidden'>
-        <thead className='w-full bg-stone-300'>
+        <thead className='w-full bg-pink-600 text-white'>
           <tr className=''>
             <th className='w-[45px] py-2.5'>#</th>
             <th className='w-[220px]'>Name</th>
@@ -44,6 +44,20 @@ const TableCom = ({ expenseData }) => {
        
           
         </tbody>
+
+        <tfoot className='bg-zinc-300'>
+          <tr>
+            <td colSpan={4} className='text-center font-semibold py-2'>Expense Total :</td>
+            
+            <td className='text-center'>{Intl.NumberFormat('en-US').format(
+              expenseData.reduce((val,acc) =>{
+                return val + acc.expense.amount
+              },0)
+            )}
+            </td>
+            <td colSpan={2}>&nbsp;</td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   )

@@ -7,8 +7,9 @@ import moment from 'moment/moment';
 import { TiTimes } from 'react-icons/ti';
 import Fade from 'react-reveal/Fade';
 import Clock from './Clock/Clock';
+import { BsFillSunFill,BsFillMoonStarsFill } from 'react-icons/bs';
 
-const ProfileBar = () => {
+const ProfileBar = ({ theme, setDarkTheme }) => {
   const [ showNoti, setShowNoti ] = useState(false);
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
@@ -38,16 +39,16 @@ const ProfileBar = () => {
   const { isLoading, error, data } = useQuery([showNoti],() =>getNoti());
 
   return (
-    <main className='flex justify-end mt-6 bg-white drop-shadow rounded sticky top-0'>
+    <main className='flex justify-end mt-6 bg-white drop-shadow rounded sticky top-0 dark:bg-transparent dark:text-white'>
     <div className='w-full flex items-center justify-between gap-4 text-white px-2 rounded py-1'>
 
     {
             showNoti && 
-          <div className='min-w-[250px] absolute bg-white drop-shadow text-stone-700 top-20 -right-28 -translate-x-1/2 px-3 py-2 rounded z-10'>
+          <div className='min-w-[250px] absolute bg-white drop-shadow text-stone-700 dark:text-white dark:bg-stone-500 drop-shadow top-20 -right-28 -translate-x-1/2 px-3 py-2 rounded z-10'>
             <Fade top opposite>
             <div style={{
               rotate:'45deg'
-            }} className='w-3 -top-1 left-1/2 translate-x-1 h-3 rotate-45 bg-white absolute'></div>
+            }} className='w-3 -top-1 left-1/2 translate-x-1 dark:bg-stone-500 h-3 rotate-45 bg-white absolute'></div>
 
             <button onClick={() =>{
               setShowNoti(false)
@@ -68,7 +69,15 @@ const ProfileBar = () => {
           }
           <Clock />
 
-          <section className='flex items-center gap-6'>
+          <section className='flex items-center gap-1'>
+
+        <button onClick={() => setDarkTheme(!theme)} className='w-[32px] h-[32px] p-1 text-xl bg-white text-stone-600 drop-shadow rounded-full flex justify-center items-center mr-2'>
+          {
+            theme ? <BsFillSunFill />:
+          <BsFillMoonStarsFill />
+          }
+        </button>
+        
         <div className='bg-white drop-shadow rounded-full p-1 relative'>
           {
             data?.length > 0 &&
@@ -83,6 +92,7 @@ const ProfileBar = () => {
             </div>
                 <p>{userInfo.name}</p>
         </div>
+
         </section>
     </div>
     </main>

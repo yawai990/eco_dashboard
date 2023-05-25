@@ -10,7 +10,7 @@ const Header = ({ title,capitalize, center,nobold, color, size, fs, ls, textCase
     ${center ? 'text-center':''}
     ${capitalize ? 'capitalize':''}
      text-${color ? color:'gray-400'} ${fs ? fs:'normal'} ${textCase ? textCase :'text-medium'} 
-     leading-${ls ? ls:1}`}
+     leading-${ls ? ls:1} dark:text-white`}
      >
       {title}
      </h1>

@@ -8,7 +8,7 @@ const RenderLink = ({Links}) => Links.map(link => <NavLink key={link.id} text={l
 
 const Sidebar = () => {
   return (
-    <div className='w-[20%] bg-white flex justify-center items-center'>
+    <div className='w-[20%] bg-white flex justify-center items-center dark:bg-stone-700 duration-500 dark:text-white'>
     <nav className='w-full h-[95%] border-r-2 border-stone-400 flex flex-col justify-start items-start pl-6'>
 
       <div className='w-full py-4 flex items-center gap-4'>
@@ -22,7 +22,7 @@ const Sidebar = () => {
           />
       </div>
 
-        <div className='w-full mt-4'>
+        <div className='w-full mt-4 dark:text-white'>
         <Text 
         title='menu' 
         color='text-stone-500' 

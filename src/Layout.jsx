@@ -13,6 +13,8 @@ const Layout = () => {
 
   useEffect(() =>{
   const data =  JSON.parse(localStorage.getItem('userInfo'));
+
+ setDarkTheme(JSON.parse(localStorage.getItem('theme')));
   
   if(data && data.isAdmin) {
     setIsLogin(true)

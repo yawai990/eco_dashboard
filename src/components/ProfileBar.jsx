@@ -35,7 +35,10 @@ const ProfileBar = ({ theme, setDarkTheme }) => {
     })
     .catch(err => err)
   };
-
+  const setTheme = () => {
+    setDarkTheme(!theme);
+    localStorage.setItem('theme',!theme)
+  }
   const { isLoading, error, data } = useQuery([showNoti],() =>getNoti());
 
   return (
@@ -71,7 +74,7 @@ const ProfileBar = ({ theme, setDarkTheme }) => {
 
           <section className='flex items-center gap-1'>
 
-        <button onClick={() => setDarkTheme(!theme)} className='w-[32px] h-[32px] p-1 text-xl bg-white text-stone-600 drop-shadow rounded-full flex justify-center items-center mr-2'>
+        <button onClick={setTheme} className='w-[32px] h-[32px] p-1 text-xl bg-white text-stone-600 drop-shadow rounded-full flex justify-center items-center mr-2'>
           {
             theme ? <BsFillSunFill />:
           <BsFillMoonStarsFill />

@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 const Login = ({setIsLogin}) => {
   const navigate = useNavigate();
   const [ loading, setLoading ] = useState(false);
+  const [ showPassword, setShowPassword ] = useState(false);
   const [ error, setError ] = useState('');
 
   const handleLogin = async (e) =>{
@@ -64,8 +65,18 @@ const Login = ({setIsLogin}) => {
         </div>
 
         <div className='bg-stone-100 rounded my-3 px-2 flex items-center'>
-        <InputLabel label={'Password'} name='login_password' bold no_border no_margin px py capitalize inputType={'password'} />  
-        <Button btnType={'button'} btnIcon={<BsEyeSlash />} btnBg='white' rounded rectangle size={24}/>
+        <InputLabel 
+        label={'Password'} 
+        name='login_password' 
+        bold no_border no_margin px py 
+        inputType={ showPassword ? 'text':'password'}
+         />  
+        <Button btnType={'button'} 
+        btnfun={()=>setShowPassword(!showPassword)}
+        btnIcon={<BsEyeSlash />} 
+        btnBg='white' 
+        rounded rectangle 
+        size={24}/>
         </div>
 
         <Button disabled={loading ? true:false} btnText={loading ? 'Loading...':'log in'} btnBg={'#FB2576'} btnColor='white' />

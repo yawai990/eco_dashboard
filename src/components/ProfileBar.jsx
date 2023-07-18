@@ -43,15 +43,16 @@ const ProfileBar = ({ theme, setDarkTheme }) => {
 
   return (
     <main className='flex justify-end mt-6 bg-white drop-shadow rounded sticky top-0 dark:bg-transparent dark:text-white'>
-    <div className='w-full flex items-center justify-between gap-4 text-white px-2 rounded py-1'>
+    <div className='w-full flex relative items-center justify-between gap-4 text-white px-2 rounded py-1'>
 
     {
             showNoti && 
-          <div className='min-w-[250px] absolute bg-white drop-shadow text-stone-700 dark:text-white dark:bg-stone-500 drop-shadow top-20 -right-28 -translate-x-1/2 px-3 py-2 rounded z-10'>
+          <div 
+          className='min-w-[250px] absolute bg-white text-stone-700 dark:text-white dark:bg-stone-500 drop-shadow top-[50px] -right-20 -translate-x-1/2 px-3 py-2 rounded z-90'>
             <Fade top opposite>
             <div style={{
               rotate:'45deg'
-            }} className='w-3 -top-1 left-1/2 translate-x-1 dark:bg-stone-500 h-3 rotate-45 bg-white absolute'></div>
+            }} className='w-3 -top-1 left-3/4 translate-x-1 dark:bg-stone-500 h-3 rotate-45 bg-white absolute'></div>
 
             <button onClick={() =>{
               setShowNoti(false)

@@ -78,7 +78,11 @@ const Products = () => {
         </div>
 
       {
-        showForm && <AddForm handleForm={handleForm} ToastNoti={ToastNoti} categories={categories} setProductAdd={setProductAdd} />
+        showForm && <AddForm 
+        handleForm={handleForm} 
+        ToastNoti={ToastNoti} 
+        categories={categories} 
+        setProductAdd={setProductAdd} />
       }
     <main className='w-[95%] p-3 h-full'>
 

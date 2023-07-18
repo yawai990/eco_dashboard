@@ -36,7 +36,7 @@ const Layout = () => {
 
         <div className='w-[80%]'>
         <ProfileBar theme={darkTheme} setDarkTheme={setDarkTheme} />  
-        <div className="w-full px-4">
+        <div className="w-full px-4 ">
         <Outlet />
         </div>
         </div>

@@ -68,8 +68,8 @@ const Settings = () => {
     return <Loading />
   }
   return (
-    <section className="w-full flex justify-center items-start">
-    <main className='w-[95%] p-3 h-full bg-white dark:bg-stone-500 drop-shadow mt-5 z-0'>
+    <section className="w-full pt-5 flex justify-center items-start">
+    <main className='w-[95%] p-2 h-full bg-white drop-shadow mt-5 -z-10'>
 
     <form onSubmit={handleUpdateUser}>
       <div className="flex gap-5">
@@ -81,7 +81,7 @@ const Settings = () => {
 
       {
         ['name','email','address'].map((c,i)=>(
-        <div key={`${c}-${i}`} className='bg-stone-100 rounded mt-3 px-2 dark:bg-stone-400'>
+        <div key={`${c}-${i}`} className='bg-stone-100 rounded mt-3 px-2 dark:bg-stone-400 dark:text-white'>
         <InputLabel label={c} name={c} bold no_border no_margin px py capitalize inputValue={userInfo[c] || ''} />  
         </div>
         ))
@@ -93,7 +93,7 @@ const Settings = () => {
    <section className='w-[50%]'>
     <Text title={'Change Password'} textCase='capitalize' size={20} color={'text-head-gray'} />
 
-    <div className="border border-stone-200 bg-white dark:bg-transparent px-3 py-1 rounded mt-4">
+    <div className="border border-stone-200 bg-white dark:bg-white px-3 py-1 rounded mt-4">
 
       {/* <PasswordFormControl showPasswordFun={() => setShowPassword({...showPassword,curPassword : !showPassword.curPassword})} labelName={'Current Password'} name={'cur_password'} type={showPassword.curPassword} value={'3224'} /> */}
       <PasswordFormControl showPasswordFun={() => setShowPassword({...showPassword,new_password : !showPassword.new_password})} labelName={'new Password'} name={'new_password'} type={showPassword.new_password} value={''} />
@@ -119,8 +119,22 @@ const Settings = () => {
 
 const PasswordFormControl = ({ labelName, name, type, value, btnType, showPasswordFun }) =>{
   return <div className='bg-stone-100 rounded mt-3 px-2 flex items-center dark:bg-stone-400 dark:text-white'>
-  <InputLabel required label={labelName} name={name} bold no_border no_margin px py inputType={type ? 'type':'password'} inputValue={value} />  
-  <Button btnfun={showPasswordFun} btnType={btnType || 'button'} btnIcon={type ? <AiFillEye className='dark:text-black'  />:<BsEyeSlash className='dark:text-black' />} btnBg='white' rounded rectangle size={24}/>
+ 
+  <InputLabel 
+  required 
+  label={labelName} 
+  name={name} bold no_border no_margin px py 
+  inputType={type ? 'type':'password'} 
+  inputValue={value} />  
+
+  <Button 
+  btnfun={showPasswordFun} 
+  btnType={btnType || 'button'}
+   btnIcon={type ? <AiFillEye className='dark:text-black'  />:<BsEyeSlash 
+   className='dark:text-white' />} btnBg='white' 
+   rounded 
+   rectangle 
+   size={24}/>
   </div>
 }
 

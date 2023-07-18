@@ -56,7 +56,7 @@ const AddForm = ({ handleForm, ToastNoti, categories, setProductAdd }) => {
   }
 
   return (
-    <div className='w-full absolute top-0 left-0 bg-[rgba(23,23,23,0.8)] z-20 py-5'>
+    <div className='w-full h-full absolute top-0 left-0 bg-[rgba(23,23,23,0.6)] z-20 py-5'>
       <div>
           <Text title='what will be your new products?' size={25} center textCase='capitalize' color='white' />
 
